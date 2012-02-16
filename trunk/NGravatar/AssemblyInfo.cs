@@ -1,8 +1,10 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
+
 
 [assembly: AssemblyTitle("NGravatar")]
 [assembly: AssemblyDescription("NGravatar")]
@@ -12,6 +14,8 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
+[assembly: Guid("9D7A2B03-D480-44D8-97CD-3391243E078F")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
