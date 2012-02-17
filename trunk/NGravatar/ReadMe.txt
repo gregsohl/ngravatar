@@ -41,3 +41,16 @@ Then, use the HtmlHelper extension method to render a full Gravatar image by ema
 
 Or, just get the Gravatar source with the UrlHelper extension method:
 <img src="<%=Url.Gravatar("ngravatar@kendoll.net", 340) %>" alt="NGravatar Gravatar" />
+
+**********
+Change Log
+**********
+-- 0.2.0
+-- 16 Feb 2012
+-- KY
+-- Changed the target framework to 3.5. We have no need for 4.0.
+
+-- 0.1.0
+-- 15 Feb 2012
+-- KY
+-- Initial release.
