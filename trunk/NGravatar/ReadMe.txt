@@ -24,6 +24,8 @@ About
 *****
 NGravatar provides an MVC-ish way of grabbing avatar images from gravatar.com.
 The project is hosted at http://code.google.com/p/ngravatar/.
+It can also be installed with NuGet: PM> Install-Package NGravatar.
+See http://nuget.org/packages/NGravatar for more information.
 
 ***
 Use
