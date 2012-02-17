@@ -26,7 +26,7 @@
 
     <div>
         <h1>...Or you can get the source from the UrlHelper extension method...</h1>
-        <img src="<%=Url.Gravatar("ngravatar@kendoll.net", 340) %>" style="display:block;margin:0px auto;" title="This Gravatar's source was gotten with a UrlHelper extension method for MVC.", alt="NGravatar Gravatar" />
+        <img src="<%=Url.Gravatar("ngravatar@kendoll.net", 340) %>" style="display:block;margin:0px auto;" title="This Gravatar's source was gotten with a UrlHelper extension method for MVC." alt="NGravatar Gravatar" />
     </div>
     
 </body>
