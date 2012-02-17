@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NGravatar</id>
+    <version>0.2.0</version>
+    <title>NGravatar</title>
+    <authors>Ken Yourek</authors>
+    <owners>Ken Yourek</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>http://code.google.com/p/ngravatar/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MVC extension methods for retrieving Gravatar avatars from gravatar.com. See the project at http://code.google.com/p/ngravatar/ for usage information.</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright Ken Yourek 2012</copyright>
+    <tags>MVC Gravatar</tags>
+  </metadata>
+</package>
