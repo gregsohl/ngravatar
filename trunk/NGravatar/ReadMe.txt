@@ -1,3 +1,6 @@
+*******
+License
+*******
 Copyright (c) <2012> <Ken Yourek>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
@@ -15,3 +18,24 @@ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PA
 PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
 FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*****
+About
+*****
+NGravatar provides an MVC-ish way of grabbing avatar images from gravatar.com.
+The project is hosted at http://code.google.com/p/ngravatar/.
+
+***
+Use
+***
+First, include the NGravatar.Html namespace in your Web.config, like so:
+<namespaces>
+    <!-- Other namespaces will be included here. -->
+    <add namespace="NGravatar.Html" />
+</namespaces>
+
+Then, use the HtmlHelper extension method to render a full Gravatar image by email:
+<%= Html.Gravatar("some@email.com", null) %>
+
+Or, just get the Gravatar source with the UrlHelper extension method:
+<img src="<%=Url.Gravatar("ngravatar@kendoll.net", 340) %>" alt="NGravatar Gravatar" />
