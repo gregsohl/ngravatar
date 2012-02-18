@@ -1,3 +1,8 @@
+# There is currently no exception handling in this script and it is therefore very fragile.
+# All it does is zips the output directory and packages the .nuspec file.
+# Remove it from the post-build event if you don't have 7-zip or NuGet installed.
+# I'll try to make it more intelligent in the future.
+
 import sys
 import clr
 clr.AddReference("System")
@@ -31,7 +36,7 @@ def zipDllDir(dll, archLoc):
     
 def packNuspec(nuspec, pkgLoc):
     fileVersion = getFileVersion(dll)
-    runCmd("NuGet", "pack \"" + nuspec + "\" -version " + fileVersion + " -OutputDirectory \"" + pkgLoc + "\"")
+    runCmd("NuGet", "pack \"" + nuspec + "\" -version " + fileVersion + " -OutputDirectory " + pkgLoc)
     
 archiveLoc = sys.argv.pop()
 nuspec = sys.argv.pop()
