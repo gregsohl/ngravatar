@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>NGravatar</id>
-    <version>0.2.0</version>
+    <version>$version$</version>
     <title>NGravatar</title>
     <authors>Ken Yourek</authors>
     <owners>Ken Yourek</owners>
