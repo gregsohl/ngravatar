@@ -18,6 +18,7 @@
 	under the MIT open-source license and is hosted at Google Code. See http://code.google.com/p/ngravatar/ for more information. 
 
 	Gravatars are retrieved based on an email address and optional parameters. A rendered Gravatar on an MVC view page might look something like:
+  
 	<%= Html.Gravatar("ngravatar@kendoll.net", 220, null, NGravatar.Rating.PG, new { style = "display:block;margin:0px auto;" }) %>
 	
 	The above line would render an <img> tag with the source of the Gravatar for "ngravatar@kendoll.net". The size, default image, rating, and any
@@ -26,8 +27,8 @@
 	Using NGravatar requires that the "NGravatar.Html" namespace be added to the Web.config. See the source at Google Code for an example project.
 	]]>	
 	</summary>
-    <releaseNotes>Initial release.</releaseNotes>
-    <copyright>Copyright Ken Yourek 2012</copyright>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright (c) Ken Yourek 2012</copyright>
     <tags>MVC Gravatar</tags>
   </metadata>
 </package>
