@@ -45,6 +45,13 @@ Or, just get the Gravatar source with the UrlHelper extension method:
 **********
 Change Log
 **********
+-- 0.2.3
+-- 18 Feb 2012
+-- KY
+-- I apparently had no idea how the NuGet push was supposed to work.
+   I removed the automation and will take care of that manually, from
+   now on.
+
 -- 0.2.1
 -- 18 Feb 2012
 -- KY
