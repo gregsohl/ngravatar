@@ -45,6 +45,12 @@ Or, just get the Gravatar source with the UrlHelper extension method:
 **********
 Change Log
 **********
+-- 0.2.1
+-- 18 Feb 2012
+-- KY
+-- Created a post-build script to zip the output directory and
+   package the NuGet spec.
+
 -- 0.2.0
 -- 16 Feb 2012
 -- KY
