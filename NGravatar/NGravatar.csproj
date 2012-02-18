@@ -54,6 +54,7 @@
     </Content>
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(ProjectDir)NPack\ipy" "$(ProjectDir)NPack\Pack.py" "$(TargetPath)" "$(ProjectDir)NGravatar.nuspec" $(ProjectDir)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
