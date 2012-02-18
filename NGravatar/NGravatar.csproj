@@ -48,14 +48,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
     <Content Include="ReadMe.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>$(ProjectDir)PostBuildScript "$(TargetDir)" "$(TargetPath)" "$(ProjectDir)Packages\$(ConfigurationName)\" "$(ProjectName)" "$(ProjectDir)\NGravatar.nuspec" "$(ProjectDir)"
-</PostBuildEvent>
+    <PostBuildEvent>"$(ProjectDir)NPack\ipy" "$(ProjectDir)NPack\Pack.py" "$(TargetPath)" "$(ProjectDir)NGravatar.nuspec" $(ProjectDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
