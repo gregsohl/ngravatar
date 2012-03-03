@@ -18,6 +18,34 @@ namespace NGravatar
         }
     }
 
+    public class GrPluralField
+    {
+        public string Value { get; private set; }
+        public string Type { get; private set; }
+        public bool Primary { get; private set; }
+
+        public GrPluralField(string value) : this(value, null) { }
+        public GrPluralField(string value, string type) : this(value, type, false) { }
+        public GrPluralField(string value, bool primary) : this(value, null, primary) { }
+
+        public GrPluralField(string value, string type, bool primary)
+        {
+            Value = value;
+            Type = type;
+            Primary = primary;
+        }
+    }
+
+    public class GrUrl : GrPluralField
+    {
+        public string Title { get; private set; }
+
+        public GrUrl(string title, string value) : base(value)
+        {
+            Title = title;
+        }
+    }
+
     public class GrName
     {
         /// <summary>
@@ -91,6 +119,19 @@ namespace NGravatar
             return new GrName(formatted, familyName, givenName, middleName, honorificPrefix, honorificSuffix);
         }
 
+        private IEnumerable<GrUrl> GetGrUrls()
+        {
+            var list = new List<GrUrl>();
+            var elements = Entry.Elements("urls");
+            foreach (var element in elements)
+            {
+                var title = element.ElementValueOrDefault("title", null);
+                var value = element.ElementValueOrDefault("value", null);
+                list.Add(new GrUrl(title, value));
+            }
+            return list.AsEnumerable();
+        }
+
         public XElement Entry { get { return _Entry; } }
 
         public string Id { get; private set; }
@@ -104,6 +145,7 @@ namespace NGravatar
         public string CurrentLocation { get; private set; }
 
         public GrName Name { get; private set; }
+        public IEnumerable<GrUrl> Urls { get; private set; }
 
         public GrofileInfoXml(XElement entry)
         {
@@ -120,7 +162,9 @@ namespace NGravatar
             AboutMe = Entry.ElementValueOrDefault("aboutMe", null);
             CurrentLocation = Entry.ElementValueOrDefault("currentLocation", null);
 
+
             Name = GetGrName();
+            Urls = GetGrUrls();
         }
     }
 }

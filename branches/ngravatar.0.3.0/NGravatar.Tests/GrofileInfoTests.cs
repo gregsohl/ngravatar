@@ -128,6 +128,22 @@ namespace NGravatar.Tests
             Assert.AreEqual(name.MiddleName, actual.MiddleName);
         }
 
+        [Test]
+        public void UrlsTest()
+        {
+            var list = new List<GrUrl>();
+            foreach (var element in Entry.Elements("urls"))
+                list.Add(new GrUrl(element.Element("title").Value, element.Element("value").Value));
+            var urls = InfoXml.Urls;
+            for (var i = 0; i < list.Count; i++)
+            {
+                var expected = list[i];
+                var actual = urls.ElementAt(i);
+                Assert.AreEqual(expected.Title, actual.Title);
+                Assert.AreEqual(expected.Value, actual.Value);
+            }
+        }
+
         private GrofileInfoXml InfoXml
         {
             get { return new GrofileInfoXml(Entry); }
