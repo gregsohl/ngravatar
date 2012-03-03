@@ -40,10 +40,14 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gravatar.cs" />
     <Compile Include="Gremail.cs" />
+    <Compile Include="Grofile.cs" />
+    <Compile Include="GrofileInfo.cs" />
     <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="Html\UrlHelperExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -92,8 +92,9 @@ namespace NGravatar
             imageUrl += "&rating=" + MaxRating.ToString();
             imageUrl += "&size=" + Size.ToString();
 
-            if (!string.IsNullOrEmpty(DefaultImage))
-                imageUrl += "&default=" + System.Web.HttpUtility.UrlEncode(DefaultImage);
+            var defImg = DefaultImage;
+            if (!string.IsNullOrEmpty(defImg))
+                imageUrl += "&default=" + System.Web.HttpUtility.UrlEncode(defImg);
 
             return imageUrl;
         }
