@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="GravatarTests.cs" />
     <Compile Include="GremailTests.cs" />
+    <Compile Include="GrofileInfoTests.cs" />
     <Compile Include="GrofileTests.cs" />
     <Compile Include="HtmlHelperTests.cs" />
     <Compile Include="UrlHelperTests.cs" />
