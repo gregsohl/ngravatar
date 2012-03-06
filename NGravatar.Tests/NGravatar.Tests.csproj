@@ -29,7 +29,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -40,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GravatarTests.cs" />
-    <Compile Include="HtmlHelperTests.cs" />
-    <Compile Include="UrlHelperTests.cs" />
+    <Compile Include="GremailTests.cs" />
+    <Compile Include="GrofileInfoTests.cs" />
+    <Compile Include="GrofileTests.cs" />
+    <Compile Include="Html\HtmlHelperTests.cs" />
+    <Compile Include="Html\UrlHelperTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -49,5 +54,10 @@
       <Project>{B08EAED0-D428-4FD3-B999-D5BA4397DA0A}</Project>
       <Name>NGravatar</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
 </Project>

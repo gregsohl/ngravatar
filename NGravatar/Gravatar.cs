@@ -86,20 +86,15 @@ namespace NGravatar
                 throw new ArgumentException("The email is empty.", "email");
 
             var imageUrl = "http://www.gravatar.com/avatar.php?";
-            var encoder = new System.Text.UTF8Encoding();
-            var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            var hashedBytes = md5.ComputeHash(encoder.GetBytes(email.ToLower()));
-            var sb = new System.Text.StringBuilder(hashedBytes.Length * 2);
+            var hash = new Gremail(email).Hash();
 
-            for (var i = 0; i < hashedBytes.Length; i++)
-                sb.Append(hashedBytes[i].ToString("X2"));
-
-            imageUrl += "gravatar_id=" + sb.ToString().ToLower();
+            imageUrl += "gravatar_id=" + hash;
             imageUrl += "&rating=" + MaxRating.ToString();
             imageUrl += "&size=" + Size.ToString();
 
-            if (!string.IsNullOrEmpty(DefaultImage))
-                imageUrl += "&default=" + System.Web.HttpUtility.UrlEncode(DefaultImage);
+            var defImg = DefaultImage;
+            if (!string.IsNullOrEmpty(defImg))
+                imageUrl += "&default=" + System.Web.HttpUtility.UrlEncode(defImg);
 
             return imageUrl;
         }
