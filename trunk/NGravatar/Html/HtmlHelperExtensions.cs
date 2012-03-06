@@ -34,7 +34,7 @@ namespace NGravatar.Html
             int? size,
             string defaultImage,
             Rating? maxRating,
-            Dictionary<string, string> htmlAttributes
+            IDictionary<string, string> htmlAttributes
         ) {
             var gravatar = new Gravatar();
             gravatar.DefaultImage = defaultImage;
@@ -92,7 +92,7 @@ namespace NGravatar.Html
             this HtmlHelper htmlHelper,
             string email,
             int? size,
-            Dictionary<string, string> htmlAttributes
+            IDictionary<string, string> htmlAttributes
         ) {
             return Gravatar(htmlHelper, email, size, null, null, htmlAttributes);
         }
@@ -112,6 +112,62 @@ namespace NGravatar.Html
             object htmlAttributes
         ) {            
             return Gravatar(htmlHelper, email, size, DictionaryFromObject(htmlAttributes));
+        }
+
+        /// <summary>
+        /// Gets a link tag of the Gravatar profile for the specified <paramref name="email"/>.
+        /// </summary>
+        /// <param name="htmlHelper">The HtmlHelper object that does the rendering.</param>
+        /// <param name="linkText">The link text to display.</param>
+        /// <param name="email">The email address whose Gravatar profile link should be rendered.</param>
+        /// <param name="htmlAttributes">Additional attributes to include in the rendered tag.</param>
+        /// <returns>An HTML string of the rendered link tag.</returns>
+        public static MvcHtmlString GrofileLink(this HtmlHelper htmlHelper, string linkText, string email, IDictionary<string, string> htmlAttributes)
+        {
+            var href = new Grofile().GetLink(email);
+            var link = "<a href=\"" + href + "\"";
+            if (htmlAttributes != null)
+                foreach (var kvp in htmlAttributes)
+                    link += " " + kvp.Key + "=\"" + kvp.Value + "\"";
+            link += ">" + linkText + "</a>";
+            return MvcHtmlString.Create(link);
+        }
+
+        /// <summary>
+        /// Gets a link tag of the Gravatar profile for the specified <paramref name="email"/>.
+        /// </summary>
+        /// <param name="htmlHelper">The HtmlHelper object that does the rendering.</param>
+        /// <param name="linkText">The link text to display.</param>
+        /// <param name="email">The email address whose Gravatar profile link should be rendered.</param>
+        /// <param name="htmlAttributes">Additional attributes to include in the rendered tag.</param>
+        /// <returns>An HTML string of the rendered link tag.</returns>
+        public static MvcHtmlString GrofileLink(this HtmlHelper htmlHelper, string linkText, string email, object htmlAttributes)
+        {
+            return GrofileLink(htmlHelper, linkText, email, DictionaryFromObject(htmlAttributes));
+        }
+
+        /// <summary>
+        /// Gets a link tag of the Gravatar profile for the specified <paramref name="email"/>.
+        /// </summary>
+        /// <param name="linkText">The link text to display.</param>
+        /// <param name="htmlHelper">The HtmlHelper object that does the rendering.</param>
+        /// <param name="email">The email address whose Gravatar profile link should be rendered.</param>
+        /// <returns>An HTML string of the rendered link tag.</returns>
+        public static MvcHtmlString GrofileLink(this HtmlHelper htmlHelper, string linkText, string email)
+        {
+            return GrofileLink(htmlHelper, linkText, email, null);
+        }
+
+        /// <summary>
+        /// Renders a script tag with the specified <paramref name="callback"/> for handling the profile JSON data.
+        /// </summary>
+        /// <param name="htmlHelper">The HtmlHelper object that renders the script tag.</param>
+        /// <param name="email">The email of the Gravatar profile whose JSON data should be used by the <paramref name="callback"/>.</param>
+        /// <param name="callback">A JavaScript function that will be called with the JSON data as a parameter when it is rendered.</param>
+        /// <returns>An HTML script tag that can be included in a page.</returns>
+        public static MvcHtmlString GrofileScript(this HtmlHelper htmlHelper, string email, string callback)
+        {
+            return MvcHtmlString.Create(new Grofile().RenderScript(email, callback));
         }
     }
 }

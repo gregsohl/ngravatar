@@ -1,8 +1,7 @@
 using NUnit.Framework;
 using System;
-using NGravatar.Html;
 
-namespace NGravatar.Tests
+namespace NGravatar.Html.Tests
 {
     [TestFixture]
     public class UrlHelperTests
@@ -33,6 +32,15 @@ namespace NGravatar.Tests
             var gravatar2 = UrlHelperExtensions.Gravatar(null, email, size);
             
             Assert.AreEqual(gravatar1, gravatar2);
+        }
+
+        [Test]
+        public void GrofileTest()
+        {
+            var email = "some@email.com";
+            var expected = new Grofile().GetLink(email);
+            var actual = UrlHelperExtensions.Grofile(null, email);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

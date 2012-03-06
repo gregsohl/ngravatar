@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NGravatar.Example")]
-[assembly: AssemblyDescription("NGravatar Example")]
+[assembly: AssemblyTitle("NGravatar.Sample")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NGravatar.Example")]
-[assembly: AssemblyCopyright("Copyright © Ken Yourek 2012")]
+[assembly: AssemblyProduct("NGravatar.Sample")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a6a2fb31-6f38-4d60-b00c-496d0add2f3a")]
+[assembly: Guid("ead99e23-6327-498d-be1f-caf72a38eb85")]
 
 // Version information for an assembly consists of the following four values:
 //
