@@ -19,7 +19,19 @@
     </div>
 
     <div>
-        
+        <h3>Gravatar profiles can be rendered as JSON data.</h3>
+        See the <a href="http://en.gravatar.com/site/implement/profiles/json/">Gravatar API</a> for details. The HtmlHelper
+        can be used to render the appropriate script tag and callback to deal with the profile JSON data when it is rendered.
     </div>
+    
+    <script type="text/javascript">
+        function changeTitle(profile) {
+            document.title = profile.entry[0].displayName + " Gravatar";
+        }
+    </script>
+
+    <%= Html.GrofileScript("ngravatar@kendoll.net", "changeTitle") %>
+
+    <%= ViewData["Grofile"] %>
 
 </asp:Content>

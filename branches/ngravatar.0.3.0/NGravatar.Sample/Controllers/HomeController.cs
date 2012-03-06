@@ -10,6 +10,8 @@ namespace NGravatar.Sample.Controllers
     {
         public ActionResult Index()
         {
+            var profile = new Grofile().GetInfo("ngravatar@kendoll.net");
+            ViewData["Grofile"] = profile;
             return View();
         }
 

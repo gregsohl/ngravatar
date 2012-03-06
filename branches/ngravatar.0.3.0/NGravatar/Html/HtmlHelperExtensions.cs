@@ -157,5 +157,17 @@ namespace NGravatar.Html
         {
             return GrofileLink(htmlHelper, linkText, email, null);
         }
+
+        /// <summary>
+        /// Renders a script tag with the specified <paramref name="callback"/> for handling the profile JSON data.
+        /// </summary>
+        /// <param name="htmlHelper">The HtmlHelper object that renders the script tag.</param>
+        /// <param name="email">The email of the Gravatar profile whose JSON data should be used by the <paramref name="callback"/>.</param>
+        /// <param name="callback">A JavaScript function that will be called with the JSON data as a parameter when it is rendered.</param>
+        /// <returns>An HTML script tag that can be included in a page.</returns>
+        public static MvcHtmlString GrofileScript(this HtmlHelper htmlHelper, string email, string callback)
+        {
+            return MvcHtmlString.Create(new Grofile().RenderScript(email, callback));
+        }
     }
 }

@@ -94,5 +94,16 @@ namespace NGravatar.Html.Tests
             var actual = HtmlHelperExtenions.GrofileLink(null, "linktext", email);
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
+
+        [Test]
+        public void GrofileScriptTest()
+        {
+            var email = "some@email.com";
+            var callback = "mycallback";
+            var src = new Grofile().GetLink(email) + ".json?callback=" + callback;
+            var expected = "<script type=\"text/javascript\" src=\"" + src + "\"></script>";
+            var actual = HtmlHelperExtenions.GrofileScript(null, email, callback);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
     }
 }

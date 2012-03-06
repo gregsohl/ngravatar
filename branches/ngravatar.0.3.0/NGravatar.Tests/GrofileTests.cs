@@ -51,15 +51,6 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetJsLinkTest()
-        {
-            var email = "some@email.com";
-            var expected = new Grofile().GetLink(email) + ".js";
-            var actual = new Grofile().GetJsLink(email);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
         public void GetJsonLinkTest()
         {
             var email = "some@email.com";
@@ -74,26 +65,6 @@ namespace NGravatar.Tests
             var email = "some@email.com";
             var expected = new Grofile().GetLink(email) + ".xml";
             var actual = new Grofile(new MyGrofileHelper()).GetXml(email);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void GetJsTest()
-        {
-            var email = "some@email.com";
-            var grofile = new Grofile(new MyGrofileHelper());
-            var expected = grofile.GetLink(email) + ".js";
-            var actual = grofile.GetJs(email);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void GetJsonTest()
-        {
-            var email = "some@email.com";
-            var grofile = new Grofile(new MyGrofileHelper());
-            var expected = grofile.GetLink(email) + ".json";
-            var actual = grofile.GetJson(email);
             Assert.AreEqual(expected, actual);
         }
 
@@ -124,6 +95,17 @@ namespace NGravatar.Tests
             Assert.AreEqual(hash, expected.Hash);
             Assert.AreEqual(expected.Id, actual.Id);
             Assert.AreEqual(expected.Hash, actual.Hash);
+        }
+
+        [Test]
+        public void RenderScriptTest()
+        {
+            var email = "some@email.com";
+            var callback = "mycallback";
+            var src = new Grofile().GetJsonLink(email) + "?callback=" + callback;
+            var expected = "<script type=\"text/javascript\" src=\"" + src + "\"></script>";
+            var actual = new Grofile().RenderScript(email, callback);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

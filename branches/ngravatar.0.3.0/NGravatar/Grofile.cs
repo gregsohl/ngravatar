@@ -39,11 +39,6 @@ namespace NGravatar
             return GetLink(email) + ".xml";
         }
 
-        internal string GetJsLink(string email)
-        {
-            return GetLink(email) + ".js";
-        }
-
         internal string GetJsonLink(string email)
         {
             return GetLink(email) + ".json";
@@ -85,14 +80,11 @@ namespace NGravatar
             return Helper.LoadString(GetXmlLink(email));
         }
 
-        public string GetJs(string email)
+        public string RenderScript(string email, string callback)
         {
-            return Helper.LoadString(GetJsLink(email));
-        }
-
-        public string GetJson(string email)
-        {
-            return Helper.LoadString(GetJsonLink(email));
+            var src = GetJsonLink(email) + "?callback=" + callback;
+            var tag = "<script type=\"text/javascript\" src=\"" + src + "\"></script>";
+            return tag;
         }
         #endregion
     }
