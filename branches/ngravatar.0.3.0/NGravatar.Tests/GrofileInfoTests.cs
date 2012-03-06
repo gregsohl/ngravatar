@@ -27,7 +27,7 @@ namespace NGravatar.Tests
         public void ToStringTest()
         {
             var formatted = "Some Name";
-            var name = new GrName(formatted, null, null, null, null, null);
+            var name = new GrofileName(formatted, null, null, null, null, null);
             Assert.AreEqual(formatted, name.ToString());
         }
     }
@@ -117,7 +117,7 @@ namespace NGravatar.Tests
             var honorificPrefix = Entry.ElementValueOrDefault("honorificPrefix", null);
             var honorificSuffix = Entry.ElementValueOrDefault("honorificSuffix", null);
 
-            var name = new GrName(formatted, familyName, givenName, middleName, honorificPrefix, honorificSuffix);
+            var name = new GrofileName(formatted, familyName, givenName, middleName, honorificPrefix, honorificSuffix);
             var actual = InfoXml.Name;
 
             Assert.AreEqual(name.FamilyName, actual.FamilyName);
@@ -131,9 +131,9 @@ namespace NGravatar.Tests
         [Test]
         public void UrlsTest()
         {
-            var list = new List<GrUrl>();
+            var list = new List<GrofileUrl>();
             foreach (var element in Entry.Elements("urls"))
-                list.Add(new GrUrl(element.Element("title").Value, element.Element("value").Value));
+                list.Add(new GrofileUrl(element.Element("title").Value, element.Element("value").Value));
             var urls = InfoXml.Urls;
             for (var i = 0; i < list.Count; i++)
             {
@@ -141,6 +141,74 @@ namespace NGravatar.Tests
                 var actual = urls.ElementAt(i);
                 Assert.AreEqual(expected.Title, actual.Title);
                 Assert.AreEqual(expected.Value, actual.Value);
+            }
+        }
+
+        [Test]
+        public void EmailsTest()
+        {
+            var list = new List<GrofileEmail>();
+            foreach (var element in Entry.Elements("emails"))
+            {
+                var value = element.Element("value").Value;
+                var primary = bool.Parse(element.ElementValueOrDefault("primary", "false"));
+                list.Add(new GrofileEmail(value, primary));
+            }
+            var emails = InfoXml.Emails;
+            for (var i = 0; i < list.Count; i++)
+            {
+                var expected = list[i];
+                var actual = emails.ElementAt(i);
+                Assert.AreEqual(expected.Value, actual.Value);
+                Assert.AreEqual(expected.Primary, actual.Primary);
+            }
+        }
+
+        [Test]
+        public void PhotosTest()
+        {
+            var list = new List<GrofilePhoto>();
+            foreach (var element in Entry.Elements("photos"))
+            {
+                var value = element.Element("value").Value;
+                var type = element.ElementValueOrDefault("type", null);
+                list.Add(new GrofilePhoto(value, type));
+            }
+            var photos = InfoXml.Photos;
+            for (var i = 0; i < list.Count; i++)
+            {
+                var expected = list[i];
+                var actual = photos.ElementAt(i);
+                Assert.AreEqual(expected.Value, actual.Value);
+                Assert.AreEqual(expected.Type, actual.Type);
+            }
+        }
+
+        [Test]
+        public void AccountsTest()
+        {
+            var list = new List<GrofileAccount>();
+            foreach (var element in Entry.Elements("accounts"))
+            {
+                var domain = element.Element("domain").Value;
+                var username = element.Element("username").Value;
+                var display = element.Element("display").Value;
+                var url = element.Element("url").Value;
+                var verified = element.Element("verified").Value;
+                var shortname = element.Element("shortname").Value;
+                list.Add(new GrofileAccount(domain, username, display, url, shortname, bool.Parse(verified)));
+            }
+            var accounts = InfoXml.Accounts;
+            for (var i = 0; i < list.Count; i++)
+            {
+                var expected = list[i];
+                var actual = accounts.ElementAt(i);
+                Assert.AreEqual(expected.Domain, actual.Domain);
+                Assert.AreEqual(expected.Username, actual.Username);
+                Assert.AreEqual(expected.Display, actual.Display);
+                Assert.AreEqual(expected.Url, actual.Url);
+                Assert.AreEqual(expected.Shortname, actual.Shortname);
+                Assert.AreEqual(expected.Verified, actual.Verified);
             }
         }
 

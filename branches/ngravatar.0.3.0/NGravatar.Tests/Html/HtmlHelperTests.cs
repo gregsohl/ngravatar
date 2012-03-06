@@ -2,9 +2,8 @@ using NUnit.Framework;
 using System;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using NGravatar.Html;
 
-namespace NGravatar.Tests
+namespace NGravatar.Html.Tests
 {
     [TestFixture]
     public class HtmlHelperTests

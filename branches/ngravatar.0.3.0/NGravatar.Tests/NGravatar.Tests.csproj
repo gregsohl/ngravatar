@@ -45,8 +45,8 @@
     <Compile Include="GremailTests.cs" />
     <Compile Include="GrofileInfoTests.cs" />
     <Compile Include="GrofileTests.cs" />
-    <Compile Include="HtmlHelperTests.cs" />
-    <Compile Include="UrlHelperTests.cs" />
+    <Compile Include="Html\HtmlHelperTests.cs" />
+    <Compile Include="Html\UrlHelperTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

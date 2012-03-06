@@ -8,6 +8,7 @@ namespace NGravatar
 {
     internal interface IGrofileHelper
     {
+        string LoadString(string uri);
         XDocument LoadXml(string uri);
     }
 
@@ -16,6 +17,11 @@ namespace NGravatar
         public XDocument LoadXml(string uri)
         {
             return XDocument.Load(uri);
+        }
+
+        public string LoadString(string uri)
+        {
+            return System.IO.File.ReadAllText(uri);
         }
     }
 
@@ -31,6 +37,16 @@ namespace NGravatar
         internal string GetXmlLink(string email)
         {
             return GetLink(email) + ".xml";
+        }
+
+        internal string GetJsLink(string email)
+        {
+            return GetLink(email) + ".js";
+        }
+
+        internal string GetJsonLink(string email)
+        {
+            return GetLink(email) + ".json";
         }
 
         internal Grofile(IGrofileHelper helper)
@@ -54,6 +70,29 @@ namespace NGravatar
                 throw new ArgumentException("The email cannot be empty.", "email");
 
             return "http://www.gravatar.com/" + new Gremail(email).Hash();
+        }
+
+        public IGrofileInfo GetInfo(string email)
+        {
+            var xdoc = GetXDocument(email);
+            var entry = xdoc.Descendants("entry").FirstOrDefault();
+            if (entry == null) return null;
+            return new GrofileInfoXml(entry);
+        }
+
+        public string GetXml(string email)
+        {
+            return Helper.LoadString(GetXmlLink(email));
+        }
+
+        public string GetJs(string email)
+        {
+            return Helper.LoadString(GetJsLink(email));
+        }
+
+        public string GetJson(string email)
+        {
+            return Helper.LoadString(GetJsonLink(email));
         }
         #endregion
     }
