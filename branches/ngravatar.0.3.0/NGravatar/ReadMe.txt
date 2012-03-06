@@ -45,6 +45,13 @@ Or, just get the Gravatar source with the UrlHelper extension method:
 **********
 Change Log
 **********
+-- 0.3.0
+-- 5 March 2012
+-- KY
+-- Adding Gravatar profile functionality to the API. New methods
+   will link to profiles, render profile javascript, get profile
+   info, etc.
+
 -- 0.2.3
 -- 18 Feb 2012
 -- KY

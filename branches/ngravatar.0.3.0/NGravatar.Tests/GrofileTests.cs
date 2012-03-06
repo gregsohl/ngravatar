@@ -18,11 +18,6 @@ namespace NGravatar.Tests
             {
                 return XDocument.Parse(Xml);
             }
-
-            public string LoadString(string uri)
-            {
-                return uri;
-            }
         }
 
         [Test]
@@ -60,11 +55,12 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetXmlTest()
+        public void GetJsonLinkTest2()
         {
             var email = "some@email.com";
-            var expected = new Grofile().GetLink(email) + ".xml";
-            var actual = new Grofile(new MyGrofileHelper()).GetXml(email);
+            var callback = "mycallback";
+            var expected = new Grofile().GetLink(email) + ".json?callback=" + callback;
+            var actual = new Grofile().GetJsonLink(email, callback);
             Assert.AreEqual(expected, actual);
         }
 

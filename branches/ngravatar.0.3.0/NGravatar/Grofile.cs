@@ -8,7 +8,6 @@ namespace NGravatar
 {
     internal interface IGrofileHelper
     {
-        string LoadString(string uri);
         XDocument LoadXml(string uri);
     }
 
@@ -17,11 +16,6 @@ namespace NGravatar
         public XDocument LoadXml(string uri)
         {
             return XDocument.Load(uri);
-        }
-
-        public string LoadString(string uri)
-        {
-            return System.IO.File.ReadAllText(uri);
         }
     }
 
@@ -41,7 +35,15 @@ namespace NGravatar
 
         internal string GetJsonLink(string email)
         {
-            return GetLink(email) + ".json";
+            return GetJsonLink(email, null);
+        }
+
+        internal string GetJsonLink(string email, string callback)
+        {
+            var link = GetLink(email) + ".json";
+            if (!string.IsNullOrEmpty(callback))
+                link += "?callback=" + callback;
+            return link;
         }
 
         internal Grofile(IGrofileHelper helper)
@@ -75,14 +77,9 @@ namespace NGravatar
             return new GrofileInfoXml(entry);
         }
 
-        public string GetXml(string email)
-        {
-            return Helper.LoadString(GetXmlLink(email));
-        }
-
         public string RenderScript(string email, string callback)
         {
-            var src = GetJsonLink(email) + "?callback=" + callback;
+            var src = GetJsonLink(email, callback);
             var tag = "<script type=\"text/javascript\" src=\"" + src + "\"></script>";
             return tag;
         }

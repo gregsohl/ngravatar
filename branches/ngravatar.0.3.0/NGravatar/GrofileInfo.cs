@@ -35,6 +35,11 @@ namespace NGravatar
             Type = type;
             Primary = primary;
         }
+
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 
     public class GrofileUrl : GrofilePluralField
@@ -76,6 +81,11 @@ namespace NGravatar
             Url = url;
             Shortname = shortname;
             Verified = verified;
+        }
+
+        public override string ToString()
+        {
+            return Display;
         }
     }
 
@@ -143,8 +153,7 @@ namespace NGravatar
         IEnumerable<GrofileUrl> Urls { get; }
         IEnumerable<GrofileEmail> Emails { get; }
         IEnumerable<GrofilePhoto> Photos { get; }
-        IEnumerable<GrofileAccount> Accounts { get; }
-        
+        IEnumerable<GrofileAccount> Accounts { get; }        
     }
 
     internal class GrofileInfoXml : IGrofileInfo
@@ -261,6 +270,11 @@ namespace NGravatar
             Emails = GetEmails();
             Photos = GetPhotos();
             Accounts = GetAccounts();
+        }
+
+        public override string ToString()
+        {
+            return DisplayName;
         }
     }
 }

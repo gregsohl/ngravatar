@@ -10,10 +10,10 @@ namespace NGravatar.Sample.Controllers
     {
         public ActionResult Index()
         {
-            var profile = new Grofile().GetInfo("ngravatar@kendoll.net");
-            ViewData["Grofile"] = profile;
-            return View();
-        }
+            // Gravatar profile info can be loaded with an email address
+            var grofileInfo = new Grofile().GetInfo("ngravatar@kendoll.net");
 
+            return View(grofileInfo);
+        }
     }
 }
