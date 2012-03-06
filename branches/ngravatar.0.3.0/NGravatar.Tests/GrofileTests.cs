@@ -94,6 +94,27 @@ namespace NGravatar.Tests
         }
 
         [Test]
+        public void GetInfoTest2()
+        {
+            var xml = "<response></response>";
+            var helper = new MyGrofileHelper { Xml = xml };
+            var grofile = new Grofile(helper);
+            var actual = grofile.GetInfo("some@email.com");
+            Assert.IsNull(actual);
+        }
+
+        [Test]
+        public void GetInfoExceptionTest()
+        {
+            foreach (var xml in new[] { null, string.Empty, "<invalid<xml> />", "junk" })
+            {
+                try { new Grofile(new MyGrofileHelper { Xml = xml }).GetInfo("some@email.com"); }
+                catch { continue; }
+                Assert.Fail("No exception thrown.");
+            }
+        }
+
+        [Test]
         public void RenderScriptTest()
         {
             var email = "some@email.com";
