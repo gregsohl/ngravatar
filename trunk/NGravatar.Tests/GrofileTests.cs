@@ -5,31 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace NGravatar.Tests
-{
+namespace NGravatar.Tests {
+
     [TestFixture]
-    public class GrofileTests
-    {
-        class MyGrofileHelper : IGrofileHelper
-        {
+    public class GrofileTests {
+
+        class MyGrofileHelper : IGrofileHelper {
             public string Xml { get; set; }
 
-            public XDocument LoadXml(string uri)
-            {
+            public XDocument LoadXml(string uri) {
                 return XDocument.Parse(Xml);
             }
         }
 
         [Test]
-        public void ConstructorTest()
-        {
+        public void ConstructorTest() {
             var grofile = new Grofile();
             Assert.AreEqual(typeof(GrofileHelper), grofile.Helper.GetType());
         }
 
         [Test]
-        public void GetLinkTest()
-        {
+        public void GetLinkTest() {
             var email = "some@email.com";
             var expected = "http://www.gravatar.com/" + new Gremail(email).Hash();
             var actual = new Grofile().GetLink(email);
@@ -37,8 +33,7 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetXmlLinkTest()
-        {
+        public void GetXmlLinkTest() {
             var email = "some@email.com";
             var expected = new Grofile().GetLink(email) + ".xml";
             var actual = new Grofile().GetXmlLink(email);
@@ -46,8 +41,7 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetJsonLinkTest()
-        {
+        public void GetJsonLinkTest() {
             var email = "some@email.com";
             var expected = new Grofile().GetLink(email) + ".json";
             var actual = new Grofile().GetJsonLink(email);
@@ -55,8 +49,7 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetJsonLinkTest2()
-        {
+        public void GetJsonLinkTest2() {
             var email = "some@email.com";
             var callback = "mycallback";
             var expected = new Grofile().GetLink(email) + ".json?callback=" + callback;
@@ -65,8 +58,7 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetXDocumentTest()
-        {
+        public void GetXDocumentTest() {
             var email = "some@email.com";
             var xml = "<expectedXml email=\"" + email + "\" />";
             var helper = new MyGrofileHelper { Xml = xml };
@@ -77,8 +69,7 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetInfoTest()
-        {
+        public void GetInfoTest() {
             var id = "1234";
             var hash = "5678";
             var xml = "<response><entry><id>" + id + "</id><hash>" + hash + "</hash></entry></response>";
@@ -94,8 +85,7 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetInfoTest2()
-        {
+        public void GetInfoTest2() {
             var xml = "<response></response>";
             var helper = new MyGrofileHelper { Xml = xml };
             var grofile = new Grofile(helper);
@@ -104,10 +94,8 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void GetInfoExceptionTest()
-        {
-            foreach (var xml in new[] { null, string.Empty, "<invalid<xml> />", "junk" })
-            {
+        public void GetInfoExceptionTest() {
+            foreach (var xml in new[] { null, string.Empty, "<invalid<xml> />", "junk" }) {
                 try { new Grofile(new MyGrofileHelper { Xml = xml }).GetInfo("some@email.com"); }
                 catch { continue; }
                 Assert.Fail("No exception thrown.");
@@ -115,8 +103,7 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void RenderScriptTest()
-        {
+        public void RenderScriptTest() {
             var email = "some@email.com";
             var callback = "mycallback";
             var src = new Grofile().GetJsonLink(email) + "?callback=" + callback;

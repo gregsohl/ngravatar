@@ -4,17 +4,14 @@ using System.Text;
 using System.Xml.Linq;
 using System.Collections.Generic;
 
-namespace NGravatar
-{
-    internal interface IGrofileHelper
-    {
+namespace NGravatar {
+
+    internal interface IGrofileHelper {
         XDocument LoadXml(string uri);
     }
 
-    internal class GrofileHelper : IGrofileHelper
-    {
-        public XDocument LoadXml(string uri)
-        {
+    internal class GrofileHelper : IGrofileHelper {
+        public XDocument LoadXml(string uri) {
             return XDocument.Load(uri);
         }
     }
@@ -22,8 +19,8 @@ namespace NGravatar
     /// <summary>
     /// Class to provide functionality for dealing with Gravatar profile information.
     /// </summary>
-    public class Grofile
-    {
+    public class Grofile {
+
         #region Private Members
         private readonly IGrofileHelper _Helper = new GrofileHelper();
         #endregion
@@ -31,32 +28,27 @@ namespace NGravatar
         #region Internal Members
         internal IGrofileHelper Helper { get { return _Helper; } }
 
-        internal string GetXmlLink(string email)
-        {
+        internal string GetXmlLink(string email) {
             return GetLink(email) + ".xml";
         }
 
-        internal string GetJsonLink(string email)
-        {
+        internal string GetJsonLink(string email) {
             return GetJsonLink(email, null);
         }
 
-        internal string GetJsonLink(string email, string callback)
-        {
+        internal string GetJsonLink(string email, string callback) {
             var link = GetLink(email) + ".json";
             if (!string.IsNullOrEmpty(callback))
                 link += "?callback=" + callback;
             return link;
         }
 
-        internal Grofile(IGrofileHelper helper)
-        {
+        internal Grofile(IGrofileHelper helper) {
             if (null == helper) throw new ArgumentNullException("helper");
             _Helper = helper;
         }
 
-        internal XDocument GetXDocument(string email)
-        {
+        internal XDocument GetXDocument(string email) {
             return Helper.LoadXml(GetXmlLink(email));
         }
         #endregion
@@ -73,8 +65,7 @@ namespace NGravatar
         /// </summary>
         /// <param name="email">The email whose profile should be linked.</param>
         /// <returns>The URL of the profile for the specified <paramref name="email"/>.</returns>
-        public string GetLink(string email)
-        {
+        public string GetLink(string email) {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(email.Trim()))
                 throw new ArgumentException("The email cannot be empty.", "email");
 
@@ -86,8 +77,7 @@ namespace NGravatar
         /// </summary>
         /// <param name="email">The email whose profile information should be returned.</param>
         /// <returns>An object that contains information about the Gravatar profile for the specified <paramref name="email"/>.</returns>
-        public IGrofileInfo GetInfo(string email)
-        {
+        public IGrofileInfo GetInfo(string email) {
             var xdoc = GetXDocument(email);
             var entry = xdoc.Descendants("entry").FirstOrDefault();
             if (entry == null) return null;
@@ -103,8 +93,7 @@ namespace NGravatar
         /// information will be passed as a paramter to this callback.
         /// </param>
         /// <returns>A rendered script tag that can be included in an HTML page.</returns>
-        public string RenderScript(string email, string callback)
-        {
+        public string RenderScript(string email, string callback) {
             var src = GetJsonLink(email, callback);
             var tag = "<script type=\"text/javascript\" src=\"" + src + "\"></script>";
             return tag;

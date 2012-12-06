@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NGravatar
-{
-    internal class Gremail
-    {
+namespace NGravatar {
+
+    internal class Gremail {
+
         private readonly string _Email;
 
         public string Email { get { return _Email; } }
 
-        public Gremail(string email)
-        {
+        public Gremail(string email) {
             if (string.IsNullOrEmpty(email)) throw new ArgumentNullException("email");
             _Email = email;
         }
 
-        public string Hash()
-        {
+        public string Hash() {
             var email = Email.Trim().ToLower();
             var encoder = new System.Text.UTF8Encoding();
             var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
