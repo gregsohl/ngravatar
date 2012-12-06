@@ -4,21 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NGravatar.Tests
-{
+namespace NGravatar.Tests {
+
     [TestFixture]
-    public class GremailTests
-    {
+    public class GremailTests {
+
         [Test]
-        public void HashTest()
-        {
+        public void HashTest() {
             var email = "MyEmailAddress@example.com ";
             Assert.AreEqual("0bc83cb571cd1c50ba6f3e8a78ef1346", new Gremail(email).Hash());
         }
 
         [Test]
-        public void TrimTest()
-        {
+        public void TrimTest() {
             var email1 = "some@email.com";
             var email2 = "\tsome@email.com ";
             var email3 = "\n some@email.com \t \r";
@@ -31,8 +29,7 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void ToLowerTest()
-        {
+        public void ToLowerTest() {
             var email1 = "some@email.com";
             var email2 = "Some@Email.Com";
             var email3 = "sOMe@EMaiL.cOM";

@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
-namespace NGravatar
-{
-    static class XElementExtensions
-    {
-        public static string ElementValueOrDefault(this XElement xElement, string elementName, string defaultValue)
-        {
+namespace NGravatar {
+
+    internal static class XElementExtensions {
+        public static string ElementValueOrDefault(this XElement xElement, string elementName, string defaultValue) {
             if (null == xElement) throw new ArgumentNullException("xElement");
-            
+
             var element = xElement.Element(elementName);
             if (element == null) return defaultValue;
             return element.Value;
@@ -21,8 +19,8 @@ namespace NGravatar
     /// <summary>
     /// A field of a Gravatar profile that may have more than one instance per profile.
     /// </summary>
-    public class GrofilePluralField
-    {
+    public class GrofilePluralField {
+
         /// <summary>
         /// Gets the value of the field.
         /// </summary>
@@ -70,8 +68,7 @@ namespace NGravatar
         /// <param name="value">The value of the field.</param>
         /// <param name="type">The type of the field.</param>
         /// <param name="primary">A flag indicating whether or not this field is the primary instance of all other similar fields.</param>
-        public GrofilePluralField(string value, string type, bool primary)
-        {
+        public GrofilePluralField(string value, string type, bool primary) {
             Value = value;
             Type = type;
             Primary = primary;
@@ -81,8 +78,7 @@ namespace NGravatar
         /// Gets a string representation of the field.
         /// </summary>
         /// <returns>The field value as a string.</returns>
-        public override string ToString()
-        {
+        public override string ToString() {
             return Value;
         }
     }
@@ -90,8 +86,8 @@ namespace NGravatar
     /// <summary>
     /// A URL field in a Gravatar profile.
     /// </summary>
-    public class GrofileUrl : GrofilePluralField
-    {
+    public class GrofileUrl : GrofilePluralField {
+
         /// <summary>
         /// Gest the title of the URL.
         /// </summary>
@@ -102,8 +98,8 @@ namespace NGravatar
         /// </summary>
         /// <param name="title">The title of the URL.</param>
         /// <param name="value">The URL value.</param>
-        public GrofileUrl(string title, string value) : base(value)
-        {
+        public GrofileUrl(string title, string value)
+            : base(value) {
             Title = title;
         }
     }
@@ -111,8 +107,8 @@ namespace NGravatar
     /// <summary>
     /// An email field in a Gravatar profile.
     /// </summary>
-    public class GrofileEmail : GrofilePluralField
-    {
+    public class GrofileEmail : GrofilePluralField {
+
         /// <summary>
         /// Creates a new instance of the email field.
         /// </summary>
@@ -130,8 +126,8 @@ namespace NGravatar
     /// <summary>
     /// A photo field in a Gravatar profile.
     /// </summary>
-    public class GrofilePhoto : GrofilePluralField
-    {
+    public class GrofilePhoto : GrofilePluralField {
+
         /// <summary>
         /// Creates a new instance of the photo field
         /// </summary>
@@ -149,8 +145,8 @@ namespace NGravatar
     /// <summary>
     /// A field in a Gravatar profile that provides information about a user's account.
     /// </summary>
-    public class GrofileAccount : GrofilePluralField
-    {
+    public class GrofileAccount : GrofilePluralField {
+
         /// <summary>
         /// Gets the domain of this account.
         /// </summary>
@@ -190,8 +186,7 @@ namespace NGravatar
         /// <param name="url">The URL of the account.</param>
         /// <param name="shortname">The short name of the account.</param>
         /// <param name="verified">A flag indicating whether or not the account is verified.</param>
-        public GrofileAccount(string domain, string username, string display, string url, string shortname, bool verified)
-        {
+        public GrofileAccount(string domain, string username, string display, string url, string shortname, bool verified) {
             Domain = domain;
             Username = username;
             Display = display;
@@ -204,8 +199,7 @@ namespace NGravatar
         /// Gets a string representation of the account.
         /// </summary>
         /// <returns>The account string to display.</returns>
-        public override string ToString()
-        {
+        public override string ToString() {
             return Display;
         }
     }
@@ -213,8 +207,8 @@ namespace NGravatar
     /// <summary>
     /// The name field of a Gravatar profile.
     /// </summary>
-    public class GrofileName
-    {
+    public class GrofileName {
+
         /// <summary>
         /// Gets the full name, including all middle names, titles, and suffixes as appropriate, formatted for display (e.g. Mr. Joseph Robert Smarr, Esq.). This is the Primary Sub-Field for this field, for the purposes of sorting and filtering. 
         /// </summary>
@@ -254,8 +248,7 @@ namespace NGravatar
         /// <param name="middleName">The middle name.</param>
         /// <param name="honorificPrefix">The prefix of the name.</param>
         /// <param name="honorificSuffix">The suffix of the name.</param>
-        public GrofileName(string formatted, string familyName, string givenName, string middleName, string honorificPrefix, string honorificSuffix)
-        {
+        public GrofileName(string formatted, string familyName, string givenName, string middleName, string honorificPrefix, string honorificSuffix) {
             Formatted = formatted;
             FamilyName = familyName;
             GivenName = givenName;
@@ -268,8 +261,7 @@ namespace NGravatar
         /// Gets the name formatted as a string.
         /// </summary>
         /// <returns>The string formatted name.</returns>
-        public override string ToString()
-        {
+        public override string ToString() {
             return Formatted;
         }
     }
@@ -277,8 +269,8 @@ namespace NGravatar
     /// <summary>
     /// Interface for Gravatar profile information objects.
     /// </summary>
-    public interface IGrofileInfo
-    {
+    public interface IGrofileInfo {
+
         /// <summary>
         /// Gets the ID value of this profile.
         /// </summary>
@@ -347,15 +339,14 @@ namespace NGravatar
         /// <summary>
         /// Gets a collection of accounts associated with this profile.
         /// </summary>
-        IEnumerable<GrofileAccount> Accounts { get; }        
+        IEnumerable<GrofileAccount> Accounts { get; }
     }
 
-    internal class GrofileInfoXml : IGrofileInfo
-    {
+    internal class GrofileInfoXml : IGrofileInfo {
+
         private readonly XElement _Entry;
 
-        private GrofileName GetName()
-        {
+        private GrofileName GetName() {
             var formatted = Entry.ElementValueOrDefault("formatted", null);
             var familyName = Entry.ElementValueOrDefault("familyName", null);
             var givenName = Entry.ElementValueOrDefault("givenName", null);
@@ -366,12 +357,10 @@ namespace NGravatar
             return new GrofileName(formatted, familyName, givenName, middleName, honorificPrefix, honorificSuffix);
         }
 
-        private IEnumerable<GrofileUrl> GetUrls()
-        {
+        private IEnumerable<GrofileUrl> GetUrls() {
             var list = new List<GrofileUrl>();
             var elements = Entry.Elements("urls");
-            foreach (var element in elements)
-            {
+            foreach (var element in elements) {
                 var title = element.ElementValueOrDefault("title", null);
                 var value = element.ElementValueOrDefault("value", null);
                 list.Add(new GrofileUrl(title, value));
@@ -379,12 +368,10 @@ namespace NGravatar
             return list.AsEnumerable();
         }
 
-        private IEnumerable<GrofileEmail> GetEmails()
-        {
+        private IEnumerable<GrofileEmail> GetEmails() {
             var list = new List<GrofileEmail>();
             var elements = Entry.Elements("emails");
-            foreach (var element in elements)
-            {
+            foreach (var element in elements) {
                 var value = element.ElementValueOrDefault("value", null);
                 var primary = element.ElementValueOrDefault("primary", "false");
                 var primaryValue = false;
@@ -394,12 +381,10 @@ namespace NGravatar
             return list.AsEnumerable();
         }
 
-        private IEnumerable<GrofileAccount> GetAccounts()
-        {
+        private IEnumerable<GrofileAccount> GetAccounts() {
             var list = new List<GrofileAccount>();
             var elements = Entry.Elements("accounts");
-            foreach (var element in elements)
-            {
+            foreach (var element in elements) {
                 var domain = element.ElementValueOrDefault("domain", null);
                 var username = element.ElementValueOrDefault("username", null);
                 var display = element.ElementValueOrDefault("display", null);
@@ -408,17 +393,15 @@ namespace NGravatar
                 var verified = element.ElementValueOrDefault("verified", "false");
                 var verifiedValue = false;
                 bool.TryParse(verified, out verifiedValue);
-                list.Add(new GrofileAccount(domain, username, display, url, shortname, verifiedValue));                
+                list.Add(new GrofileAccount(domain, username, display, url, shortname, verifiedValue));
             }
             return list.AsEnumerable();
         }
 
-        private IEnumerable<GrofilePhoto> GetPhotos()
-        {
+        private IEnumerable<GrofilePhoto> GetPhotos() {
             var list = new List<GrofilePhoto>();
             var elements = Entry.Elements("photos");
-            foreach (var element in elements)
-            {
+            foreach (var element in elements) {
                 var value = element.ElementValueOrDefault("value", null);
                 var type = element.ElementValueOrDefault("type", null);
                 list.Add(new GrofilePhoto(value, type));
@@ -444,8 +427,7 @@ namespace NGravatar
         public IEnumerable<GrofilePhoto> Photos { get; private set; }
         public IEnumerable<GrofileAccount> Accounts { get; private set; }
 
-        public GrofileInfoXml(XElement entry)
-        {
+        public GrofileInfoXml(XElement entry) {
             if (null == entry) throw new ArgumentNullException("entry");
             _Entry = entry;
 
@@ -466,8 +448,7 @@ namespace NGravatar
             Accounts = GetAccounts();
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return DisplayName;
         }
     }

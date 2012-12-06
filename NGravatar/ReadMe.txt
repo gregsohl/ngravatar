@@ -45,6 +45,11 @@ Or, just get the Gravatar source with the UrlHelper extension method:
 **********
 Change Log
 **********
+-- 0.3.2
+-- 5 December 2012
+-- Ken Yourek
+-- Changed the code style/format.
+
 -- 0.3.0
 -- 5 March 2012
 -- Ken Yourek

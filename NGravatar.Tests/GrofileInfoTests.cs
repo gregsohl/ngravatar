@@ -5,14 +5,13 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Text;
 
-namespace NGravatar.Tests
-{
+namespace NGravatar.Tests {
+
     [TestFixture]
-    public class XElementExtensionsTests
-    {
+    public class XElementExtensionsTests {
+
         [Test]
-        public void ElementValueOrDefaultTest()
-        {
+        public void ElementValueOrDefaultTest() {
             var xml = "<xel><el1>el1text</el1></xel>";
             var xel = XElement.Parse(xml);
             Assert.AreEqual("el1text", xel.ElementValueOrDefault("el1", null));
@@ -21,11 +20,9 @@ namespace NGravatar.Tests
     }
 
     [TestFixture]
-    public class GrNameTests
-    {
+    public class GrNameTests {
         [Test]
-        public void ToStringTest()
-        {
+        public void ToStringTest() {
             var formatted = "Some Name";
             var name = new GrofileName(formatted, null, null, null, null, null);
             Assert.AreEqual(formatted, name.ToString());
@@ -33,83 +30,72 @@ namespace NGravatar.Tests
     }
 
     [TestFixture]
-    public class GrofileInfoTests
-    {
+    public class GrofileInfoTests {
         [Test]
-        public void IdTest()
-        {
+        public void IdTest() {
             var expected = Entry.Element("id").Value;
             var actual = InfoXml.Id;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void HashTest()
-        {
+        public void HashTest() {
             var expected = Entry.Element("hash").Value;
             var actual = InfoXml.Hash;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void RequestHashTest()
-        {
+        public void RequestHashTest() {
             var expected = Entry.Element("requestHash").Value;
             var actual = InfoXml.RequestHash;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void ProfileUrlTest()
-        {
+        public void ProfileUrlTest() {
             var expected = Entry.Element("profileUrl").Value;
             var actual = InfoXml.ProfileUrl;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void PreferredUsernameTest()
-        {
+        public void PreferredUsernameTest() {
             var expected = Entry.Element("preferredUsername").Value;
             var actual = InfoXml.PreferredUsername;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void ThumbnailUrlTest()
-        {
+        public void ThumbnailUrlTest() {
             var expected = Entry.Element("thumbnailUrl").Value;
             var actual = InfoXml.ThumbnailUrl;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void DisplayNameTest()
-        {
+        public void DisplayNameTest() {
             var expected = Entry.Element("displayName").Value;
             var actual = InfoXml.DisplayName;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void AboutMeTest()
-        {
+        public void AboutMeTest() {
             var expected = Entry.Element("aboutMe").Value;
             var actual = InfoXml.AboutMe;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void CurrentLocationTest()
-        {
+        public void CurrentLocationTest() {
             var expected = Entry.Element("currentLocation").Value;
             var actual = InfoXml.CurrentLocation;
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void NameTest()
-        {
+        public void NameTest() {
             var formatted = Entry.ElementValueOrDefault("formatted", null);
             var familyName = Entry.ElementValueOrDefault("familyName", null);
             var givenName = Entry.ElementValueOrDefault("givenName", null);
@@ -129,14 +115,12 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void UrlsTest()
-        {
+        public void UrlsTest() {
             var list = new List<GrofileUrl>();
             foreach (var element in Entry.Elements("urls"))
                 list.Add(new GrofileUrl(element.Element("title").Value, element.Element("value").Value));
             var urls = InfoXml.Urls;
-            for (var i = 0; i < list.Count; i++)
-            {
+            for (var i = 0; i < list.Count; i++) {
                 var expected = list[i];
                 var actual = urls.ElementAt(i);
                 Assert.AreEqual(expected.Title, actual.Title);
@@ -145,18 +129,15 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void EmailsTest()
-        {
+        public void EmailsTest() {
             var list = new List<GrofileEmail>();
-            foreach (var element in Entry.Elements("emails"))
-            {
+            foreach (var element in Entry.Elements("emails")) {
                 var value = element.Element("value").Value;
                 var primary = bool.Parse(element.ElementValueOrDefault("primary", "false"));
                 list.Add(new GrofileEmail(value, primary));
             }
             var emails = InfoXml.Emails;
-            for (var i = 0; i < list.Count; i++)
-            {
+            for (var i = 0; i < list.Count; i++) {
                 var expected = list[i];
                 var actual = emails.ElementAt(i);
                 Assert.AreEqual(expected.Value, actual.Value);
@@ -165,18 +146,15 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void PhotosTest()
-        {
+        public void PhotosTest() {
             var list = new List<GrofilePhoto>();
-            foreach (var element in Entry.Elements("photos"))
-            {
+            foreach (var element in Entry.Elements("photos")) {
                 var value = element.Element("value").Value;
                 var type = element.ElementValueOrDefault("type", null);
                 list.Add(new GrofilePhoto(value, type));
             }
             var photos = InfoXml.Photos;
-            for (var i = 0; i < list.Count; i++)
-            {
+            for (var i = 0; i < list.Count; i++) {
                 var expected = list[i];
                 var actual = photos.ElementAt(i);
                 Assert.AreEqual(expected.Value, actual.Value);
@@ -185,11 +163,9 @@ namespace NGravatar.Tests
         }
 
         [Test]
-        public void AccountsTest()
-        {
+        public void AccountsTest() {
             var list = new List<GrofileAccount>();
-            foreach (var element in Entry.Elements("accounts"))
-            {
+            foreach (var element in Entry.Elements("accounts")) {
                 var domain = element.Element("domain").Value;
                 var username = element.Element("username").Value;
                 var display = element.Element("display").Value;
@@ -199,8 +175,7 @@ namespace NGravatar.Tests
                 list.Add(new GrofileAccount(domain, username, display, url, shortname, bool.Parse(verified)));
             }
             var accounts = InfoXml.Accounts;
-            for (var i = 0; i < list.Count; i++)
-            {
+            for (var i = 0; i < list.Count; i++) {
                 var expected = list[i];
                 var actual = accounts.ElementAt(i);
                 Assert.AreEqual(expected.Domain, actual.Domain);
@@ -212,15 +187,12 @@ namespace NGravatar.Tests
             }
         }
 
-        private GrofileInfoXml InfoXml
-        {
+        private GrofileInfoXml InfoXml {
             get { return new GrofileInfoXml(Entry); }
         }
 
-        private XElement Entry
-        {
-            get
-            {
+        private XElement Entry {
+            get {
                 return XElement.Parse(@"
 <entry>
 	<id>32922842</id>
