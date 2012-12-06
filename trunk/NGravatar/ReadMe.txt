@@ -47,30 +47,30 @@ Change Log
 **********
 -- 0.3.0
 -- 5 March 2012
--- KY
+-- Ken Yourek
 -- Adding Gravatar profile functionality to the API. New methods
    will link to profiles, render profile javascript, get profile
    info, etc.
 
 -- 0.2.3
 -- 18 Feb 2012
--- KY
+-- Ken Yourek
 -- I apparently had no idea how the NuGet push was supposed to work.
    I removed the automation and will take care of that manually, from
    now on.
 
 -- 0.2.1
 -- 18 Feb 2012
--- KY
+-- Ken Yourek
 -- Created a post-build script to zip the output directory and
    package the NuGet spec.
 
 -- 0.2.0
 -- 16 Feb 2012
--- KY
+-- Ken Yourek
 -- Changed the target framework to 3.5. We have no need for 4.0.
 
 -- 0.1.0
 -- 15 Feb 2012
--- KY
+-- Ken Yourek
 -- Initial release.
