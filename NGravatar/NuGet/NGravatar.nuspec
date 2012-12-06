@@ -2,11 +2,11 @@
 <package >
   <metadata>
     <id>NGravatar</id>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
     <title>NGravatar</title>
     <authors>Ken Yourek</authors>
     <owners>Ken Yourek</owners>
-    <licenseUrl>http://ken.yourek.net/License/NGravatar</licenseUrl>
+    <licenseUrl>http://code.google.com/p/ngravatar/wiki/License</licenseUrl>
     <projectUrl>http://code.google.com/p/ngravatar/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
@@ -27,8 +27,8 @@
 	Using NGravatar requires that the "NGravatar.Html" namespace be added to the Web.config. See the source at Google Code for an example project.
 	]]>	
 	</summary>
-    <releaseNotes>Added functionality to get profile information for Gravatar users.</releaseNotes>
-    <copyright>Copyright (c) Ken Yourek 2012</copyright>
+    <releaseNotes>Updated license information.</releaseNotes>
+    <copyright>Copyright (c) Ken Yourek 2012-2013</copyright>
     <tags>MVC Gravatar</tags>
   </metadata>
 </package>
