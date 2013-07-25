@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace NGravatar.Core {
+namespace NGravatar {
     
     /// <summary>
-    /// NGravatar avatar rating.
+    /// Gravatar avatar rating.
     /// </summary>
     public enum GravatarRating {
     
