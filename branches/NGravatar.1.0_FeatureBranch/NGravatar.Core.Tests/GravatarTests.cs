@@ -9,6 +9,37 @@ namespace NGravatar.Tests {
     public class GravatarTests {
 
         [Test]
+        public void DefaultInstance_IsInitiallyDefault() {
+            var expected = new Gravatar();
+            var actual = Gravatar.DefaultInstance;
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected.Default, actual.Default);
+            Assert.AreEqual(expected.Rating, actual.Rating);
+            Assert.AreEqual(expected.RenderedSize, actual.RenderedSize);
+            Assert.AreEqual(expected.Size, actual.Size);
+        }
+
+        [Test]
+        public void DefaultInstance_CanBeSet() {
+            var expected = new Gravatar();
+            Assert.AreNotSame(expected, Gravatar.DefaultInstance);
+            Gravatar.DefaultInstance = expected;
+            Assert.AreSame(expected, Gravatar.DefaultInstance);
+        }
+
+        [Test]
+        public void DefaultInstance_ThrowsExceptionIfNull() {
+            try {
+                Gravatar.DefaultInstance = null;
+            }
+            catch (Exception ex) {
+                Assert.IsInstanceOf<ArgumentNullException>(ex);
+                return;
+            }
+            Assert.Fail("No exception thrown.");
+        }
+
+        [Test]
         public void Rating_IsInitiallyNull() {
             Assert.IsNull(new Gravatar().Rating);
         }
@@ -30,7 +61,7 @@ namespace NGravatar.Tests {
 
         [Test]
         public void GetEmailHash_HashesEmailAddress() {
-            var actual = new Gravatar().GetEmailHash("ngravatar@kendoll.net");
+            var actual = new Gravatar().GetHash("ngravatar@kendoll.net");
             var expected = "bccc2b381d103797427c161951be5fa5";
             Assert.AreEqual(expected, actual);
         }
@@ -100,7 +131,7 @@ namespace NGravatar.Tests {
 
         [Test]
         public void Render_IncludesHtmlAttributes() {
-            var actual = new Gravatar().Render("ngravatar@kendoll.net", htmlAttributes: new Dictionary<string, string> { { "class", "class-name" }, { "id", "idValue" } });
+            var actual = new Gravatar().Render("ngravatar@kendoll.net", htmlAttributes: new Dictionary<string, object> { { "class", "class-name" }, { "id", "idValue" } });
             var expected = "<img src=\"http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&size=80\" width=\"80\" height=\"80\" class=\"class-name\" id=\"idValue\" />";
             Assert.AreEqual(expected, actual);
         }

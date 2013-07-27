@@ -5,6 +5,8 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Collections.Generic;
 
+using NGravatar.Utils;
+
 namespace NGravatar {
 
     /// <summary>
@@ -12,8 +14,47 @@ namespace NGravatar {
     /// </summary>
     public class Gravatar {
 
-        private readonly UTF8Encoding Encoding = new UTF8Encoding();
-        private readonly MD5CryptoServiceProvider MD5CryptoServiceProvider = new MD5CryptoServiceProvider();
+        internal GravatarHasher Hasher {
+            get {
+                if (null == _Hasher) _Hasher = GravatarHasher.DefaultInstance;
+                return _Hasher;
+            }
+            set {
+                if (null == value) throw new ArgumentNullException("Hasher");
+                _Hasher = value;
+            }
+        }
+        private GravatarHasher _Hasher;
+
+        internal HtmlBuilder HtmlBuilder {
+            get {
+                if (null == _HtmlBuilder) _HtmlBuilder = HtmlBuilder.DefaultInstance;
+                return _HtmlBuilder;
+            }
+            set {
+                if (null == value) throw new ArgumentNullException("HtmlBuilder");
+                _HtmlBuilder = value;
+            }
+        }
+        private HtmlBuilder _HtmlBuilder;
+
+        /// <summary>
+        /// Gets or sets the default instance of <see cref="T:Gravatar"/> used.
+        /// </summary>
+        /// <exception cref="T:ArgumentNullException">
+        /// Thrown if <c>value</c> is <c>null</c>.
+        /// </exception>
+        public static Gravatar DefaultInstance {
+            get {
+                if (null == _DefaultInstance) _DefaultInstance = new Gravatar();
+                return _DefaultInstance;
+            }
+            set {
+                if (null == value) throw new ArgumentNullException("DefaultInstance");
+                _DefaultInstance = value;
+            }
+        }
+        private static Gravatar _DefaultInstance;
 
         /// <summary>
         /// Gets or sets the maximum Gravatar rating allowed to be displayed
@@ -57,34 +98,21 @@ namespace NGravatar {
         /// </summary>
         /// <param name="emailAddress">The email address for which the hash should be computed.</param>
         /// <returns>The hash of the <paramref name="emailAddress"/>.</returns>
-        public string GetEmailHash(string emailAddress) {
-            if (null == emailAddress) throw new ArgumentNullException("email");
-
-            emailAddress = emailAddress.Trim().ToLower();
-
-            var hashedBytes = MD5CryptoServiceProvider.ComputeHash(Encoding.GetBytes(emailAddress));
-            var length = hashedBytes.Length;
-            var sb = new StringBuilder(length * 2);
-
-            for (var i = 0; i < length; i++) {
-                sb.Append(hashedBytes[i].ToString("X2"));
-            }
-
-            return sb.ToString().ToLower();
+        public string GetHash(string emailAddress) {
+            return Hasher.Hash(emailAddress);
         }
 
         /// <summary>
         /// Gets a link to the image file of the Gravatar for the specified <paramref name="emailAddress"/>.
         /// </summary>
         /// <param name="emailAddress">The email whose Gravatar image source should be returned.</param>
-        /// <param name="rating">The allowed rating of the Gravatar avatar, or <c>null</c> to use the default rating.</param>
         /// <param name="size">The size of the Gravatar image, or <c>null</c> to use the default size.</param>
         /// <param name="default">The location of the default Gravatar image, or <c>null</c> to use the default location.</param>
+        /// <param name="rating">The allowed rating of the Gravatar avatar, or <c>null</c> to use the default rating.</param>
         /// <returns>The URL of the Gravatar for the specified <paramref name="emailAddress"/>.</returns>
-        public string GetUrl(string emailAddress, GravatarRating? rating = null, int? size = null, string @default = null) {
+        public string GetUrl(string emailAddress, int? size = null, string @default = null, GravatarRating? rating = null) {
 
-            var hash = GetEmailHash(emailAddress);
-            var url = "http://www.gravatar.com/avatar.php?gravatar_id=" + hash;
+            var url = string.Format("http://www.gravatar.com/avatar.php?gravatar_id={0}", GetHash(emailAddress));
 
             rating = rating ?? Rating;
             if (rating.HasValue) url += "&rating=" + rating.Value;
@@ -102,28 +130,21 @@ namespace NGravatar {
         /// Creates an img tag whose source is the address of the Gravatar for the specified <paramref name="emailAddress"/>.
         /// </summary>
         /// <param name="emailAddress">The email address whose Gravatar should be rendered.</param>
+        /// <param name="size">The size of the Gravatar image, or <c>null</c> to use the default size.</param>
+        /// <param name="default">The location of the default Gravatar image, or <c>null</c> to use the default location.</param>
+        /// <param name="rating">The allowed rating of the Gravatar avatar, or <c>null</c> to use the default rating.</param>
         /// <param name="htmlAttributes">Additional attributes to include in the img tag.</param>
         /// <returns>An HTML img tag of the rendered Gravatar.</returns>
-        public string Render(string emailAddress, GravatarRating? rating = null, int? size = null, string @default = null, IDictionary<string, string> htmlAttributes = null) {
-
-            var attrs = " ";
-            if (htmlAttributes != null) {
-                htmlAttributes.Remove("src");
-                htmlAttributes.Remove("width");
-                htmlAttributes.Remove("height");
-                htmlAttributes.ToList().ForEach(pair => {
-                    attrs += string.Format("{0}=\"{1}\" ", pair.Key, pair.Value);
-                });
-            }
+        public string Render(string emailAddress, int? size = null, string @default = null, GravatarRating? rating = null, IDictionary<string, object> htmlAttributes = null) {
 
             size = size ?? Size ?? RenderedSize;
 
-            return string.Format(
-                "<img src=\"{0}\" width=\"{1}\" height=\"{1}\"{2}/>",
-                GetUrl(emailAddress, rating, size, @default),
-                size,
-                attrs
-            );
+            htmlAttributes = new Dictionary<string, object>(htmlAttributes);
+            htmlAttributes["src"] = GetUrl(emailAddress, size, @default, rating);
+            htmlAttributes["width"] = size;
+            htmlAttributes["height"] = size;
+
+            return HtmlBuilder.RenderImageTag(htmlAttributes);
         }
     }
 }

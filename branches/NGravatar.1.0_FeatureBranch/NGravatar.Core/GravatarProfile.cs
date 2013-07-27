@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Xml.Linq;
 using System.Linq;
+using System.Collections.Generic;
 
+using NGravatar.Utils;
 using NGravatar.Abstractions.Xml.Linq;
 
 namespace NGravatar {
@@ -27,50 +29,62 @@ namespace NGravatar {
         }
         private XDocumentAbstraction _XDocumentAbstraction;
 
-        public Gravatar Gravatar {
+        internal GravatarHasher Hasher {
             get {
-                if (null == _Gravatar) _Gravatar = new Gravatar();
-                return _Gravatar;
+                if (null == _Hasher) _Hasher = GravatarHasher.DefaultInstance;
+                return _Hasher;
             }
             set {
-                if (null == value) throw new ArgumentNullException("Gravatar");
-                _Gravatar = value;
+                if (null == value) throw new ArgumentNullException("Hasher");
+                _Hasher = value;
             }
         }
-        private Gravatar _Gravatar;
+        private GravatarHasher _Hasher;
+
+        internal HtmlBuilder HtmlBuilder {
+            get {
+                if (null == _HtmlBuilder) _HtmlBuilder = HtmlBuilder.DefaultInstance;
+                return _HtmlBuilder;
+            }
+            set {
+                if (null == value) throw new ArgumentNullException("HtmlBuilder");
+                _HtmlBuilder = value;
+            }
+        }
+        private HtmlBuilder _HtmlBuilder;
 
         /// <summary>
-        /// Gets the URL that links to the Gravatar profile of the specified <paramref name="email"/>.
+        /// Gets the URL that links to the Gravatar profile of the specified <paramref name="emailAddress"/>.
         /// </summary>
-        /// <param name="email">The email whose profile should be linked.</param>
-        /// <returns>The URL of the profile for the specified <paramref name="email"/>.</returns>
-        public string GetUrl(string email) {
-            return "http://www.gravatar.com/" + Gravatar.GetEmailHash(email);
+        /// <param name="emailAddress">The email whose profile should be linked.</param>
+        /// <returns>The URL of the profile for the specified <paramref name="emailAddress"/>.</returns>
+        public string GetUrl(string emailAddress) {
+            return "http://www.gravatar.com/" + Hasher.Hash(emailAddress);
         }
 
-        public string GetXmlApiUrl(string email) {
-            return GetUrl(email) + ".xml";
+        public string GetXmlApiUrl(string emailAddress) {
+            return GetUrl(emailAddress) + ".xml";
         }
 
-        public string GetJsonApiUrl(string email, string callback) {
+        public string GetJsonApiUrl(string emailAddress, string callback) {
             return string.IsNullOrEmpty(callback)
-                ? string.Format("{0}.json", GetUrl(email))
-                : string.Format("{0}.json?callback={1}", GetUrl(email), callback);
+                ? string.Format("{0}.json", GetUrl(emailAddress))
+                : string.Format("{0}.json?callback={1}", GetUrl(emailAddress), callback);
         }
 
-        public string GetJsonApiUrl(string email) {
-            return GetJsonApiUrl(email, null);
+        public string GetJsonApiUrl(string emailAddress) {
+            return GetJsonApiUrl(emailAddress, null);
         }
 
         /// <summary>
-        /// Parses Gravatar profile information for the specified <paramref name="email"/> into an object.
+        /// Parses Gravatar profile information for the specified <paramref name="emailAddress"/> into an object.
         /// </summary>
-        /// <param name="email">The email whose profile information should be returned.</param>
-        /// <returns>An object that contains information about the Gravatar profile for the specified <paramref name="email"/>.</returns>
-        public GravatarProfileInformation LoadInformation(string email) {
+        /// <param name="emailAddress">The email whose profile information should be returned.</param>
+        /// <returns>An object that contains information about the Gravatar profile for the specified <paramref name="emailAddress"/>.</returns>
+        public GravatarProfileInformation LoadInformation(string emailAddress) {
             return new GravatarProfileInformation {
                 Parser = new GravatarProfileParser {
-                    Entry = LoadXDocument(email)
+                    Entry = LoadXDocument(emailAddress)
                         .Descendants("entry")
                         .First()
                 }
@@ -80,17 +94,23 @@ namespace NGravatar {
         /// <summary>
         /// Creates a script tag that can be included in an HTML page to process a Gravatar profile on the client.
         /// </summary>
-        /// <param name="email">The email whose profile should be processed.</param>
+        /// <param name="emailAddress">The email whose profile should be processed.</param>
         /// <param name="callback">
         /// The JavaScript callback function which should be called after the profile information is loaded. The profile
         /// information will be passed as a paramter to this callback.
         /// </param>
         /// <returns>A rendered script tag that can be included in an HTML page.</returns>
-        public string RenderScript(string email, string callback) {
-            return string.Format(
-                "<script type=\"text/javascript\" src=\"{0}\"></script>", 
-                GetJsonApiUrl(email, callback)
-            );
+        public string RenderScript(string emailAddress, string callback) {
+            return HtmlBuilder.RenderScriptTag(new Dictionary<string, object> {
+                { "type", "text/javascript" },
+                { "src", GetJsonApiUrl(emailAddress, callback) }
+            });
+        }
+
+        public string RenderLink(string emailAddress, string linkText, IDictionary<string, object> htmlAttributes) {
+            htmlAttributes = new Dictionary<string, object>(htmlAttributes);
+            htmlAttributes["href"] = GetUrl(emailAddress);
+            return HtmlBuilder.RenderLinkTag(linkText, htmlAttributes);
         }
     }
 }

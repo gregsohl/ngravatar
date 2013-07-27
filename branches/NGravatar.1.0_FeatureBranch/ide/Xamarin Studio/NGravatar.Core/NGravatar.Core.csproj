@@ -76,9 +76,16 @@
     <Compile Include="..\..\..\NGravatar.Core\GravatarProfileName.cs">
       <Link>GravatarProfileName.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarHasher.cs">
+      <Link>GravatarHasher.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\Utils\HtmlBuilder.cs">
+      <Link>Utils\HtmlBuilder.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
     <Folder Include="Abstractions\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
 </Project>

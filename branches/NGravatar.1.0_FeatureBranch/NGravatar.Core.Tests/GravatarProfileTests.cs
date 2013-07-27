@@ -18,16 +18,6 @@ namespace NGravatar.Tests {
         }
 
         [Test]
-        public void Gravatar_IsInitiallyNewInstance() {
-            var actual = new GravatarProfile().Gravatar;
-            var expected = new Gravatar();
-            Assert.AreEqual(expected.Default, actual.Default);
-            Assert.AreEqual(expected.Rating, actual.Rating);
-            Assert.AreEqual(expected.RenderedSize, actual.RenderedSize);
-            Assert.AreEqual(expected.Size, actual.Size);
-        }
-
-        [Test]
         public void GetUrl_ReturnsUrl() {
             Assert.AreEqual("http://www.gravatar.com/bccc2b381d103797427c161951be5fa5", new GravatarProfile().GetUrl("ngravatar@kendoll.net"));
         }
