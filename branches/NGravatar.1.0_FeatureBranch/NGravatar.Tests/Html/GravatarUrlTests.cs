@@ -8,7 +8,7 @@ namespace NGravatar.Html.Tests {
     public class GravatarUrlTests {
 
         [Test]
-        public void GravatarTest() {
+        public void Gravatar_ReturnsUrl() {
             var size = 274;
             var email = "ngravatar@kendoll.net";
             var defaultImage = "pathtodefault.img";
@@ -24,7 +24,7 @@ namespace NGravatar.Html.Tests {
         }
 
         [Test]
-        public void GravatarTest2() {
+        public void Gravatar_ReturnsUrlWithDefaultAttributes() {
             var size = 274;
             var email = "ngravatar@kendoll.net";
             var gravatar1 = GravatarUrl.Gravatar(null, email, size, null, null);
@@ -34,10 +34,10 @@ namespace NGravatar.Html.Tests {
         }
 
         [Test]
-        public void GrofileTest() {
+        public void GravatarProfile_ReturnsUrl() {
             var email = "some@email.com";
             var expected = new GravatarProfile().GetUrl(email);
-            var actual = GravatarUrl.Grofile(null, email);
+            var actual = GravatarUrl.GravatarProfile(null, email);
             Assert.AreEqual(expected, actual);
         }
     }

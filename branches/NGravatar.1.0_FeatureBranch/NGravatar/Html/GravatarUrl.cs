@@ -66,7 +66,7 @@ namespace NGravatar.Html {
         /// <param name="urlHelper">The UrlHelper object getting the link.</param>
         /// <param name="emailAddress">The email whose Gravatar profile link should be returned.</param>
         /// <returns>A link to the Gravatar profile page for the given <paramref name="emailAddress"/>.</returns>
-        public static string Grofile(this UrlHelper urlHelper, string emailAddress) {
+        public static string GravatarProfile(this UrlHelper urlHelper, string emailAddress) {
             return GravatarProfileInstance.GetUrl(emailAddress);
         }
     }

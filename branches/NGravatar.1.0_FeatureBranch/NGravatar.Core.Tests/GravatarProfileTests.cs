@@ -61,5 +61,14 @@ namespace NGravatar.Tests {
             var information = p.LoadInformation("my@email.com");
             Assert.AreSame(xdoc.Descendants("entry").First(), information.Parser.Entry);
         }
+
+        [Test]
+        public void RenderLink_EscapesLinkText() {
+            var p = new GravatarProfile();
+            var url = p.GetUrl("some@domain.com");
+            var expected = "<a href=\"" + url + "\">&lt;script type=&quot;text/javascript&quot; src=&#39;bad.js&#39;&gt;&lt;/script&gt;</a>";
+            var actual = p.RenderLink("some@domain.com", "<script type=\"text/javascript\" src='bad.js'></script>");
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

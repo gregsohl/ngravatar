@@ -135,5 +135,15 @@ namespace NGravatar.Tests {
             var expected = "<img class=\"class-name\" id=\"idValue\" src=\"http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&amp;size=80\" width=\"80\" height=\"80\" />";
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Render_EscapesHtml() {
+            var attrs = new Dictionary<string, object> {
+                { "title", "\"><script src=\"oops.js\"></script>\"" }
+            };
+            var actual = new Gravatar().Render("ngravatar@kendoll.net", htmlAttributes: attrs);
+            var expected = "<img title=\"&quot;>&lt;script src=&quot;oops.js&quot;>&lt;/script>&quot;\" src=\"http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&amp;size=80\" width=\"80\" height=\"80\" />";
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

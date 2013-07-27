@@ -107,7 +107,7 @@ namespace NGravatar {
             });
         }
 
-        public string RenderLink(string emailAddress, string linkText, IDictionary<string, object> htmlAttributes) {
+        public string RenderLink(string emailAddress, string linkText, IDictionary<string, object> htmlAttributes = null) {
             htmlAttributes = htmlAttributes == null
                 ? new Dictionary<string, object>()
                 : new Dictionary<string, object>(htmlAttributes);

@@ -7,10 +7,10 @@ using NUnit.Framework;
 namespace NGravatar.Html.Tests {
 
     [TestFixture]
-    public class NGravatarHtmlTests {
+    public class GravatarHtmlTests {
 
         [Test]
-        public void GravatarTest() {
+        public void Gravatar_ReturnsRenderedHtml() {
             var email = "ngravatar@kendoll.net";
             var size = 110;
             var defaultImage = "pathtodefault.img";
@@ -32,7 +32,7 @@ namespace NGravatar.Html.Tests {
         }
 
         [Test]
-        public void GravatarTest2() {
+        public void Gravatar_RendersHtmlWithAttributes() {
             var email = "ngravatar@kendoll.net";
             var size = 110;
             var defaultImage = "pathtodefault.img";
@@ -50,7 +50,7 @@ namespace NGravatar.Html.Tests {
         }
 
         [Test]
-        public void GravatarTest3() {
+        public void Gravatar_RendersHtmlWithDefaultAttributes() {
             var email = "ngravatar@kendoll.net";
             var size = 110;
 
@@ -61,7 +61,7 @@ namespace NGravatar.Html.Tests {
         }
 
         [Test]
-        public void GrofileLinkTest() {
+        public void GravatarProfileLink_RendersLink() {
             var email = "some@email.com";
             var linkText = "linktext";
             var href = new GravatarProfile().GetUrl(email);
@@ -72,7 +72,7 @@ namespace NGravatar.Html.Tests {
         }
 
         [Test]
-        public void GrofileLinkTest2() {
+        public void GravatarProfileLink_RendersLinkWithAttributes() {
             var email = "some@email.com";
             var href = new GravatarProfile().GetUrl(email);
             var attr = new { rel = "grofile", @class = "myclass" };
@@ -82,7 +82,7 @@ namespace NGravatar.Html.Tests {
         }
 
         [Test]
-        public void GrofileLinkTest3() {
+        public void GravatarProfileLink_RendersLinkWithNoAttributes() {
             var email = "some@email.com";
             var href = new GravatarProfile().GetUrl(email);
             var expected = "<a href=\"" + href + "\">linktext</a>";
@@ -91,7 +91,7 @@ namespace NGravatar.Html.Tests {
         }
 
         [Test]
-        public void GrofileScriptTest() {
+        public void GravatarProfileScript_RendersScriptTag() {
             var email = "some@email.com";
             var callback = "mycallback";
             var src = new GravatarProfile().GetUrl(email) + ".json?callback=" + callback;
