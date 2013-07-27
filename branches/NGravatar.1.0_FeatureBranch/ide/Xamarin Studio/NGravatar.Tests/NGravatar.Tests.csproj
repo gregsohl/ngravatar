@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A5798DB6-BB8C-4257-B8C9-6752A30A2F23}</ProjectGuid>
+    <ProjectGuid>{2362E055-1FEB-4EE9-883F-EE4C7FD75189}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>NGravatar.Tests</RootNamespace>
     <AssemblyName>NGravatar.Tests</AssemblyName>
@@ -21,43 +21,48 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+    <Reference Include="nunit.framework">
       <Private>False</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="GravatarTests.cs" />
-    <Compile Include="GremailTests.cs" />
-    <Compile Include="GrofileInfoTests.cs" />
-    <Compile Include="GrofileTests.cs" />
-    <Compile Include="Html\HtmlHelperTests.cs" />
-    <Compile Include="Html\UrlHelperTests.cs" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.3.0.20105.1\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\NGravatar\NGravatar.csproj">
-      <Project>{B08EAED0-D428-4FD3-B999-D5BA4397DA0A}</Project>
-      <Name>NGravatar</Name>
-    </ProjectReference>
+    <Folder Include="Properties\" />
+    <Folder Include="Html\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Compile Include="..\..\..\NGravatar.Tests\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Tests\Html\GravatarHtmlTests.cs">
+      <Link>Html\GravatarHtmlTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Tests\Html\GravatarUrlTests.cs">
+      <Link>Html\GravatarUrlTests.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NGravatar\NGravatar.csproj">
+      <Project>{C73506AC-116F-40BF-AF1F-829923D84F87}</Project>
+      <Name>NGravatar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NGravatar.Core\NGravatar.Core.csproj">
+      <Project>{FC4062C5-868C-4CF4-989D-ED0BF3DB9748}</Project>
+      <Name>NGravatar.Core</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

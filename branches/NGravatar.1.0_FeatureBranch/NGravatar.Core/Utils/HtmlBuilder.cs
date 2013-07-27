@@ -41,8 +41,8 @@ namespace NGravatar.Utils {
             return string.Format("<img {0} />", RenderAttributes(htmlAttributes));
         }
 
-        public virtual string RenderLinkTag(string innerHtml, IDictionary<string, object> htmlAttributes) {
-            return string.Format("<a {0}>{1}</a>", RenderAttributes(htmlAttributes), HttpUtility.HtmlEncode(innerHtml));
+        public virtual string RenderLinkTag(string linkText, IDictionary<string, object> htmlAttributes) {
+            return string.Format("<a {0}>{1}</a>", RenderAttributes(htmlAttributes), HttpUtility.HtmlEncode(linkText));
         }
 
         public virtual string RenderScriptTag(IDictionary<string, object> htmlAttributes) {

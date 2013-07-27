@@ -58,4 +58,9 @@
       <Name>NGravatar.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\NGravatar\ReadMe.txt">
+      <Link>ReadMe.txt</Link>
+    </None>
+  </ItemGroup>
 </Project>
