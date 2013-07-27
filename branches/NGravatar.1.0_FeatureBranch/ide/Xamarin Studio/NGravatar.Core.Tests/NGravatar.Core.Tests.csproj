@@ -78,6 +78,9 @@
     <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileTests.cs">
       <Link>GravatarProfileTests.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileInformationTests.cs">
+      <Link>GravatarProfileInformationTests.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NGravatar.Core\NGravatar.Core.csproj">
