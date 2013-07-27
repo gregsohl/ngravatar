@@ -127,7 +127,7 @@ namespace NGravatar.Html {
             this HtmlHelper htmlHelper,
             string emailAddress,
             int? size,
-            IDictionary<string, string> htmlAttributes
+            IDictionary<string, object> htmlAttributes
         ) {
             return Gravatar(htmlHelper, emailAddress, size, null, null, htmlAttributes);
         }

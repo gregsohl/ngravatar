@@ -1,0 +1,69 @@
+﻿@using NGravatar.Html;
+
+<h2>How to use NGravatar</h2>
+
+<h4>Include the NGravatar.Html namespace.</h4>
+<p>
+    This namespace is required wherever you want to use the HtmlHelper or UrlHelper
+    extension methods provided by the NGravatar assembly. You can include it directly
+    in your views by adding an @("@using") directive at the top, like so:
+</p>
+<pre>
+@("@using NGravatar.Html;")
+</pre>
+<hr />
+
+<h4>Render Gravatar avatars in an img element.</h4>
+<p>
+    This is done by providing an email address and size to the Gravatar HtmlHelper
+    extension method.
+</p>
+<pre>
+@("@Html.Gravatar(\"ngravatar@kendoll.net\", 100)")
+</pre>
+@Html.Gravatar("ngravatar@kendoll.net", 100)
+
+<p>
+    Element attributes can also be added to the img tag by providing a
+    value for the htmlAttributes parameter.
+</p>
+<pre>
+@("@Html.Gravatar(\"ngravatar@kendoll.net\", 80, new { style = \"border:10px solid blue;\" })")
+</pre>
+@Html.Gravatar("ngravatar@kendoll.net", 80, new { style = "border:10px solid blue;" })
+<hr />
+
+<h4>Get an email address's Gravatar URL.</h4>
+<p>
+    If you want to create the img tag yourself (or any other tag that uses the Gravatar URL), 
+    you can get just the URL of a Gravatar avatar by using the Gravatar UrlHelper extension methods.
+</p>
+<pre>
+@("<a href=\"@Url.Gravatar(\"ngravatar@kendoll.net\", 200)\">@Url.Gravatar(\"ngravatar@kendoll.net\", 200)</a>")
+</pre>
+<a href="@Url.Gravatar("ngravatar@kendoll.net", 200)">@Url.Gravatar("ngravatar@kendoll.net", 200)</a>
+<hr />
+
+<h4>Set the rating and default images of Gravatars.</h4>
+<p>
+    Gravatar lets you control the content of rendered Gravatar images by providing a rating that images
+    may not exceed. For example, if you provide a rating of PG, only images rated PG or G may be shown.
+    If no Gravatar exists for an email address, you can provide a default image that will be shown in
+    its place. All of this functionality is provided by NGravatar.
+</p>
+<pre>
+@("@Html.Gravatar(")
+    @("\"`not%an#email$address`\",")
+    @("100,")
+    @("\"http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100\",")
+    @("NGravatar.GravatarRating.PG,")
+    @("null")
+@(")")
+</pre>
+@Html.Gravatar(
+    "`not%an#email$address`", 
+    100, 
+    "http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100", 
+    NGravatar.GravatarRating.PG, 
+    null
+)
