@@ -67,7 +67,7 @@ namespace NGravatar {
         /// </summary>
         /// <param name="email">The email whose profile information should be returned.</param>
         /// <returns>An object that contains information about the Gravatar profile for the specified <paramref name="email"/>.</returns>
-        public GravatarProfileInformation GetInformation(string email) {
+        public GravatarProfileInformation LoadInformation(string email) {
             return new GravatarProfileInformation {
                 Parser = new GravatarProfileParser {
                     Entry = LoadXDocument(email)
@@ -87,9 +87,10 @@ namespace NGravatar {
         /// </param>
         /// <returns>A rendered script tag that can be included in an HTML page.</returns>
         public string RenderScript(string email, string callback) {
-            var src = GetJsonApiUrl(email, callback);
-            var tag = "<script type=\"text/javascript\" src=\"" + src + "\"></script>";
-            return tag;
+            return string.Format(
+                "<script type=\"text/javascript\" src=\"{0}\"></script>", 
+                GetJsonApiUrl(email, callback)
+            );
         }
     }
 }
