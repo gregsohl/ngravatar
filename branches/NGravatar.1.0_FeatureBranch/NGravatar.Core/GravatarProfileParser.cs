@@ -14,29 +14,20 @@ namespace NGravatar {
             return el.Value;
         }
 
+        private static bool GetBooleanOrDefault(XElement element, string elementName, bool defaultValue) {
+            var value = GetValueOrDefault(element, elementName);
+            var result = default(bool);
+            return bool.TryParse(value, out result)
+                ? result
+                : defaultValue;
+        }
+
         private static string GetValueOrDefault(XElement element, string elementName) {
-            return GetValueOrDefault(element, elementName, default(string));
+            return GetValueOrDefault(element, elementName, null);
         }
 
-        private static IEnumerable<T> EnumerateElements<T>(XElement element, string elementName, Func<XElement, T> selector) {
-            if (null == element) throw new ArgumentNullException("element");
-            if (null == selector) throw new ArgumentNullException("selector");
-            return element
-                .Elements(elementName)
-                .Select(el => selector(el))
-                .ToList();
-        }
-
-        private string GetValueOrDefault(string elementName, string defaultValue) {
-            return GetValueOrDefault(Entry, elementName, defaultValue);
-        }
-
-        private string GetValueOrDefault(string elementName) {
-            return GetValueOrDefault(Entry, elementName);
-        }
-
-        private IEnumerable<T> EnumerateElements<T>(string elementName, Func<XElement, T> selector) {
-            return EnumerateElements(Entry, elementName, selector);
+        private static bool GetBooleanOrDefault(XElement element, string elementName) {
+            return GetBooleanOrDefault(element, elementName, false);
         }
 
         public XElement Entry {
@@ -52,66 +43,101 @@ namespace NGravatar {
         private XElement _Entry;     
 
         public string ParseId() {
-            return GetValueOrDefault("id");
+            return GetValueOrDefault(Entry, "id");
         }
 
         public string ParseHash() {
-            return GetValueOrDefault("hash");
+            return GetValueOrDefault(Entry, "hash");
         }
 
         public string ParseRequestHash() {
-            return GetValueOrDefault("requestHash");
+            return GetValueOrDefault(Entry, "requestHash");
         }
 
         public string ParseProfileUrl() {
-            return GetValueOrDefault("profileUrl");
+            return GetValueOrDefault(Entry, "profileUrl");
         }
 
         public string ParsePreferredUsername() {
-            return GetValueOrDefault("preferredUsername");
+            return GetValueOrDefault(Entry, "preferredUsername");
         }
 
         public string ParseThumbnailUrl() {
-            return GetValueOrDefault("thumbnailUrl");
+            return GetValueOrDefault(Entry, "thumbnailUrl");
         }
 
         public string ParseDisplayName() {
-            return GetValueOrDefault("displayName");
+            return GetValueOrDefault(Entry, "displayName");
         }
 
         public string ParseAboutMe() {
-            return GetValueOrDefault("aboutMe");
+            return GetValueOrDefault(Entry, "aboutMe");
         }
 
         public string ParseCurrentLocation() {
-            return GetValueOrDefault("currentLocation");
+            return GetValueOrDefault(Entry, "currentLocation");
         }
 
         public GravatarProfileName ParseName() {
-            var formatted = GetValueOrDefault("formatted");
-            var givenName = GetValueOrDefault("givenName");
-            var middleName = GetValueOrDefault("middleName");
-            var familyName = GetValueOrDefault("familyName");
-            var honorificPrefix = GetValueOrDefault("honorificPrefix");
-            var honorificSuffix = GetValueOrDefault("honorificSuffix");
+            var nameElement = Entry.Elements("name").FirstOrDefault();
+            if (nameElement == null) return null;
+
+            var formatted = GetValueOrDefault(nameElement, "formatted");
+            var givenName = GetValueOrDefault(nameElement, "givenName");
+            var middleName = GetValueOrDefault(nameElement, "middleName");
+            var familyName = GetValueOrDefault(nameElement, "familyName");
+            var honorificPrefix = GetValueOrDefault(nameElement, "honorificPrefix");
+            var honorificSuffix = GetValueOrDefault(nameElement, "honorificSuffix");
 
             return new GravatarProfileName(formatted, familyName, givenName, middleName, honorificPrefix, honorificSuffix);
         }
 
         public IEnumerable<GravatarProfileUrl> ParseUrls() {
-            throw new NotImplementedException();
+            return Entry
+                .Elements("urls")
+                .Select(element => 
+                    new GravatarProfileUrl(
+                        GetValueOrDefault(element, "title"),
+                        GetValueOrDefault(element, "value")
+                    )
+                );
         }
 
         public IEnumerable<GravatarProfileEmail> ParseEmails() {
-            throw new NotImplementedException();
+            return Entry
+                .Elements("emails")
+                .Select(element => 
+                    new GravatarProfileEmail(
+                        GetValueOrDefault(element, "value"),
+                        GetBooleanOrDefault(element, "primary")
+                    )
+                );
         }
 
         public IEnumerable<GravatarProfilePhoto> ParsePhotos() {
-            throw new NotImplementedException();
+            return Entry
+                .Elements("photos")
+                .Select(element =>
+                    new GravatarProfilePhoto(
+                        GetValueOrDefault(element, "value"),
+                        GetValueOrDefault(element, "type")
+                    )
+                );
         }
 
         public IEnumerable<GravatarProfileAccount> ParseAccounts() {
-            throw new NotImplementedException();
+            return Entry
+                .Elements("accounts")
+                .Select(element =>
+                    new GravatarProfileAccount(
+                        GetValueOrDefault(element, "domain"),
+                        GetValueOrDefault(element, "username"),
+                        GetValueOrDefault(element, "display"),
+                        GetValueOrDefault(element, "url"),
+                        GetValueOrDefault(element, "shortname"),
+                        GetBooleanOrDefault(element, "verified")
+                    )
+                );
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 using NUnit.Framework;
 
-namespace NGravatar.Core.Tests {
+namespace NGravatar.Tests {
 
     [TestFixture]
     public class GravatarRatingTests {

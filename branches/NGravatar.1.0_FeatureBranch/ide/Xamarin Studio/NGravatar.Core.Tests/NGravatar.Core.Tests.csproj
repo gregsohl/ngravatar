@@ -33,6 +33,9 @@
     <Reference Include="nunit.framework">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -47,6 +50,27 @@
     </Compile>
     <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarTests.cs">
       <Link>GravatarTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfilePluralFieldTests.cs">
+      <Link>GravatarProfilePluralFieldTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileUrlTests.cs">
+      <Link>GravatarProfileUrlTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfilePhotoTests.cs">
+      <Link>GravatarProfilePhotoTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileNameTests.cs">
+      <Link>GravatarProfileNameTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileEmailTests.cs">
+      <Link>GravatarProfileEmailTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileAccountTests.cs">
+      <Link>GravatarProfileAccountTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileParserTests.cs">
+      <Link>GravatarProfileParserTests.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

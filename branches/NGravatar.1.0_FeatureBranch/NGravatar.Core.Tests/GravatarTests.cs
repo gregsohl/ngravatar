@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using NUnit.Framework;
 
-namespace NGravatar.Core.Tests {
+namespace NGravatar.Tests {
 
     [TestFixture]
     public class GravatarTests {
