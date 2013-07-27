@@ -147,7 +147,7 @@ namespace NGravatar {
             forceDefault = forceDefault ?? ForceDefault;
             if (forceDefault.HasValue && forceDefault.Value) query += "&f=y";
 
-            var url = GetBaseUrl(useHttps) + "/" + GetHash(emailAddress);
+            var url = GetBaseUrl(useHttps) + "/avatar/" + GetHash(emailAddress);
 
             if (query != string.Empty) url += "?" + query.TrimStart(new[] { '&' });
 
@@ -162,16 +162,21 @@ namespace NGravatar {
         /// <param name="rating">The allowed rating of the Gravatar avatar, or <c>null</c> to use the default rating.</param>
         /// <param name="default">The location of the default Gravatar image, or <c>null</c> to use the default location.</param>
         /// <param name="forceDefault"><c>true</c> to force the <paramref name="default"/> image to be loaded. Otherwise, <c>false</c>.</param>        
+        /// <param name="useHttps">
+        /// <c>true</c> to use the HTTPS Gravatar URL. Otherwise, <c>false</c>.
+        /// This value can be <c>null</c> to use the <see cref="Gravatar.UseHttps"/> value
+        /// of the <see cref="Gravatar.DefaultInstance"/>.
+        /// </param>
         /// <param name="htmlAttributes">Additional attributes to include in the img tag.</param>
         /// <returns>An HTML img tag of the rendered Gravatar.</returns>
-        public string Render(string emailAddress, int? size = null, GravatarRating? rating = null, string @default = null, bool? forceDefault = null, IDictionary<string, object> htmlAttributes = null) {
+        public string Render(string emailAddress, int? size = null, GravatarRating? rating = null, string @default = null, bool? forceDefault = null, bool? useHttps = null, IDictionary<string, object> htmlAttributes = null) {
 
             size = size ?? Size ?? RenderedSize;
 
             htmlAttributes = htmlAttributes == null
                 ? new Dictionary<string, object>()
                 : new Dictionary<string, object>(htmlAttributes);
-            htmlAttributes["src"] = GetUrl(emailAddress, size, rating, @default, forceDefault);
+            htmlAttributes["src"] = GetUrl(emailAddress, size, rating, @default, forceDefault, useHttps);
             htmlAttributes["width"] = size;
             htmlAttributes["height"] = size;
 

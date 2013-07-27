@@ -21,7 +21,7 @@ namespace NGravatar.Html.Tests {
                 { "name2", "val2" }
             };
 
-            var gravatarHtml = GravatarHtml.Gravatar(null, email, size, defaultImage, maxRating, attributes);
+            var gravatarHtml = GravatarHtml.Gravatar(null, email, size, maxRating, defaultImage, false, false, attributes);
 
             var gravatar = new Gravatar();
             gravatar.Size = size;
@@ -43,8 +43,8 @@ namespace NGravatar.Html.Tests {
                 { "name2", "val2" }
             };
 
-            var gravatarHtm1 = GravatarHtml.Gravatar(null, email, size, defaultImage, maxRating, attributes);
-            var gravatarHtm2 = GravatarHtml.Gravatar(null, email, size, defaultImage, maxRating, new { name1 = "val1", name2 = "val2" });
+            var gravatarHtm1 = GravatarHtml.Gravatar(null, email, size, maxRating, defaultImage, false, false, attributes);
+            var gravatarHtm2 = GravatarHtml.Gravatar(null, email, size, maxRating, defaultImage, false, false, new { name1 = "val1", name2 = "val2" });
 
             Assert.AreEqual(gravatarHtm1.ToString(), gravatarHtm2.ToString());
         }
@@ -67,7 +67,7 @@ namespace NGravatar.Html.Tests {
             var href = new GravatarProfile().GetUrl(email);
             var attr = new Dictionary<string, object> { { "rel", "grofile" } };
             var expected = "<a rel=\"grofile\" href=\"" + href + "\">linktext</a>";
-            var actual = GravatarHtml.GravatarProfileLink(null, email, linkText, attr);
+            var actual = GravatarHtml.GravatarProfileLink(null, email, linkText, false, attr);
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
 
@@ -77,7 +77,7 @@ namespace NGravatar.Html.Tests {
             var href = new GravatarProfile().GetUrl(email);
             var attr = new { rel = "grofile", @class = "myclass" };
             var expected = "<a rel=\"grofile\" class=\"myclass\" href=\"" + href + "\">linktext</a>";
-            var actual = GravatarHtml.GravatarProfileLink(null, email, "linktext", attr);
+            var actual = GravatarHtml.GravatarProfileLink(null, email, "linktext", false, attr);
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
 

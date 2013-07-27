@@ -41,18 +41,6 @@ namespace NGravatar {
         }
         private HtmlBuilder _HtmlBuilder;
 
-        internal Gravatar GravatarInstance {
-            get {
-                if (null == _GravatarInstance) _GravatarInstance = Gravatar.DefaultInstance;
-                return _GravatarInstance;
-            }
-            set {
-                if (null == value) throw new ArgumentNullException("GravatarInstance");
-                _GravatarInstance = value;
-            }
-        }
-        private Gravatar _GravatarInstance;
-
         /// <summary>
         /// Gets the URL that links to the Gravatar profile of the specified <paramref name="emailAddress"/>.
         /// </summary>
@@ -64,7 +52,7 @@ namespace NGravatar {
         /// </param>
         /// <returns>The URL of the profile for the specified <paramref name="emailAddress"/>.</returns>
         public string GetUrl(string emailAddress, bool? useHttps = null) {
-            var g = GravatarInstance;
+            var g = Gravatar.DefaultInstance;
             return g.GetBaseUrl(useHttps) + "/" + g.GetHash(emailAddress);
         }
 
@@ -108,19 +96,24 @@ namespace NGravatar {
         /// The JavaScript callback function which should be called after the profile information is loaded. The profile
         /// information will be passed as a paramter to this callback.
         /// </param>
+        /// <param name="useHttps">
+        /// <c>true</c> to use the HTTPS Gravatar URL. Otherwise, <c>false</c>.
+        /// This value can be <c>null</c> to use the <see cref="Gravatar.UseHttps"/> value
+        /// of the <see cref="Gravatar.DefaultInstance"/>.
+        /// </param>
         /// <returns>A rendered script tag that can be included in an HTML page.</returns>
-        public string RenderScript(string emailAddress, string callback) {
+        public string RenderScript(string emailAddress, string callback, bool? useHttps = null) {
             return HtmlBuilder.RenderScriptTag(new Dictionary<string, object> {
                 { "type", "text/javascript" },
                 { "src", GetJsonApiUrl(emailAddress, callback) }
             });
         }
 
-        public string RenderLink(string emailAddress, string linkText, IDictionary<string, object> htmlAttributes = null) {
+        public string RenderLink(string emailAddress, string linkText, bool? useHttps = null, IDictionary<string, object> htmlAttributes = null) {
             htmlAttributes = htmlAttributes == null
                 ? new Dictionary<string, object>()
                 : new Dictionary<string, object>(htmlAttributes);
-            htmlAttributes["href"] = GetUrl(emailAddress);
+            htmlAttributes["href"] = GetUrl(emailAddress, useHttps);
             return HtmlBuilder.RenderLinkTag(linkText, htmlAttributes);
         }
     }
