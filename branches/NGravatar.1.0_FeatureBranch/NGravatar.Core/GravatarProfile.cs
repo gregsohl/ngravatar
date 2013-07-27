@@ -11,6 +11,10 @@ namespace NGravatar {
     /// </summary>
     public class GravatarProfile {
 
+        private XDocument LoadXDocument(string email) {
+            return XDocumentAbstraction.Load(GetXmlApiUrl(email));
+        }
+
         internal XDocumentAbstraction XDocumentAbstraction {
             get {
                 if (null == _XDocumentAbstraction) _XDocumentAbstraction = XDocumentAbstraction.Default;
@@ -22,10 +26,6 @@ namespace NGravatar {
             }
         }
         private XDocumentAbstraction _XDocumentAbstraction;
-
-        internal XDocument LoadXDocument(string email) {
-            return XDocumentAbstraction.Load(GetXmlApiUrl(email));
-        }
 
         public Gravatar Gravatar {
             get {
