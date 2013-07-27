@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FC4062C5-868C-4CF4-989D-ED0BF3DB9748}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NGravatar.Core</RootNamespace>
+    <AssemblyName>NGravatar.Core</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="..\..\..\NGravatar.Core\Gravatar.cs">
+      <Link>Gravatar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarRating.cs">
+      <Link>GravatarRating.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfile.cs">
+      <Link>GravatarProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\Abstractions\Xml\Linq\XDocumentAbstraction.cs">
+      <Link>Abstractions\Xml\Linq\XDocumentAbstraction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileInformation.cs">
+      <Link>GravatarProfileInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileParser.cs">
+      <Link>GravatarProfileParser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfilePluralField.cs">
+      <Link>GravatarProfilePluralField.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileUrl.cs">
+      <Link>GravatarProfileUrl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileEmail.cs">
+      <Link>GravatarProfileEmail.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfilePhoto.cs">
+      <Link>GravatarProfilePhoto.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileAccount.cs">
+      <Link>GravatarProfileAccount.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileName.cs">
+      <Link>GravatarProfileName.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarHasher.cs">
+      <Link>GravatarHasher.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\Utils\HtmlBuilder.cs">
+      <Link>Utils\HtmlBuilder.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Abstractions\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+</Project>

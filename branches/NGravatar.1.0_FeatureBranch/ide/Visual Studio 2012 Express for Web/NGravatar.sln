@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGravatar.Core", "NGravatar.Core\NGravatar.Core.csproj", "{FC4062C5-868C-4CF4-989D-ED0BF3DB9748}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGravatar.Core.Tests", "NGravatar.Core.Tests\NGravatar.Core.Tests.csproj", "{C35305D7-C38B-4906-BED2-BA69A84ACB12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGravatar", "NGravatar\NGravatar.csproj", "{C73506AC-116F-40BF-AF1F-829923D84F87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGravatar.Tests", "NGravatar.Tests\NGravatar.Tests.csproj", "{2362E055-1FEB-4EE9-883F-EE4C7FD75189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGravatar.Sample", "NGravatar.Sample\NGravatar.Sample.csproj", "{2B5AEAE4-000A-4E0D-84AE-2EACB3F140C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC4062C5-868C-4CF4-989D-ED0BF3DB9748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4062C5-868C-4CF4-989D-ED0BF3DB9748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4062C5-868C-4CF4-989D-ED0BF3DB9748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4062C5-868C-4CF4-989D-ED0BF3DB9748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C35305D7-C38B-4906-BED2-BA69A84ACB12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C35305D7-C38B-4906-BED2-BA69A84ACB12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C35305D7-C38B-4906-BED2-BA69A84ACB12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C35305D7-C38B-4906-BED2-BA69A84ACB12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C73506AC-116F-40BF-AF1F-829923D84F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73506AC-116F-40BF-AF1F-829923D84F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73506AC-116F-40BF-AF1F-829923D84F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73506AC-116F-40BF-AF1F-829923D84F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2362E055-1FEB-4EE9-883F-EE4C7FD75189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2362E055-1FEB-4EE9-883F-EE4C7FD75189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2362E055-1FEB-4EE9-883F-EE4C7FD75189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2362E055-1FEB-4EE9-883F-EE4C7FD75189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B5AEAE4-000A-4E0D-84AE-2EACB3F140C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B5AEAE4-000A-4E0D-84AE-2EACB3F140C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B5AEAE4-000A-4E0D-84AE-2EACB3F140C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B5AEAE4-000A-4E0D-84AE-2EACB3F140C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = NGravatar.Sample\NGravatar.Sample.csproj
+	EndGlobalSection
+EndGlobal
