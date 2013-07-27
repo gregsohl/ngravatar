@@ -36,5 +36,20 @@ namespace NGravatar.Tests {
         public void Name_IsNullForEmptyProfile() {
             Assert.IsNull(new GravatarProfileInformation().Name);
         }
+
+        [Test]
+        public void Name_ComesFromParsedName() {
+            var parser = new Mock<GravatarProfileParser>(MockBehavior.Strict);
+            var name = new GravatarProfileName("", "", "", "", "", "");
+            var count = 0;
+            parser.Setup(p => p.ParseName()).Returns(delegate {
+                count++;
+                return name;
+            });
+            var info = new GravatarProfileInformation { Parser = parser.Object };
+            Assert.AreSame(name, info.Name);
+            Assert.AreSame(name, info.Name);
+            Assert.AreEqual(1, count);
+        }
     }
 }

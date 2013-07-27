@@ -39,9 +39,9 @@
     you can get just the URL of a Gravatar avatar by using the Gravatar UrlHelper extension methods.
 </p>
 <pre>
-@("<a href=\"@Url.Gravatar(\"ngravatar@kendoll.net\", 200)\">@Url.Gravatar(\"ngravatar@kendoll.net\", 200)</a>")
+@("<a href=\"@Url.Gravatar(\"ngravatar@kendoll.net\", 200)\"><strong>Click</strong> for a Gravatar avatar.</a>")
 </pre>
-<a href="@Url.Gravatar("ngravatar@kendoll.net", 200)">@Url.Gravatar("ngravatar@kendoll.net", 200)</a>
+<a href="@Url.Gravatar("ngravatar@kendoll.net", 200)"><strong>Click</strong> for a Gravatar avatar.</a>
 <hr />
 
 <h4>Set the rating and default images of Gravatars.</h4>
@@ -67,3 +67,21 @@
     NGravatar.GravatarRating.PG, 
     null
 )
+
+<p>
+    The maximum Gravatar rating and default image can also be set site-wide by using the static
+    DefaultInstance property of the Gravatar type. Calls to extension methods that don't provide
+    rating or default-image information will fall back to using the property values of this instance.
+</p>
+<pre>
+@("@{")
+    @("NGravatar.Gravatar.DefaultInstance.Rating = NGravatar.GravatarRating.PG;")
+    @("NGravatar.Gravatar.DefaultInstance.Default = \"http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100\";")
+@("}")
+@("@Html.Gravatar(\"`not%an#email$address`\", 100);")
+</pre>
+@{ 
+    NGravatar.Gravatar.DefaultInstance.Rating = NGravatar.GravatarRating.PG; 
+    NGravatar.Gravatar.DefaultInstance.Default = "http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100";
+}
+@Html.Gravatar("`not%an#email$address`", 100);

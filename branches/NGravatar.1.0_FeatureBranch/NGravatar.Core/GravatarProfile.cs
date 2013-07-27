@@ -84,9 +84,7 @@ namespace NGravatar {
         public GravatarProfileInformation LoadInformation(string emailAddress) {
             return new GravatarProfileInformation {
                 Parser = new GravatarProfileParser {
-                    Entry = LoadXDocument(emailAddress)
-                        .Descendants("entry")
-                        .FirstOrDefault() ?? new XElement("entry")
+                    Entry = LoadXDocument(emailAddress).Descendants("entry").FirstOrDefault() ?? new XElement("entry")
                 }
             };
         }
