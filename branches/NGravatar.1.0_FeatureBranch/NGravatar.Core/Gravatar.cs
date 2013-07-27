@@ -139,7 +139,9 @@ namespace NGravatar {
 
             size = size ?? Size ?? RenderedSize;
 
-            htmlAttributes = new Dictionary<string, object>(htmlAttributes);
+            htmlAttributes = htmlAttributes == null
+                ? new Dictionary<string, object>()
+                : new Dictionary<string, object>(htmlAttributes);
             htmlAttributes["src"] = GetUrl(emailAddress, size, @default, rating);
             htmlAttributes["width"] = size;
             htmlAttributes["height"] = size;

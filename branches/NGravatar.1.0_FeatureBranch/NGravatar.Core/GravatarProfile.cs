@@ -108,7 +108,9 @@ namespace NGravatar {
         }
 
         public string RenderLink(string emailAddress, string linkText, IDictionary<string, object> htmlAttributes) {
-            htmlAttributes = new Dictionary<string, object>(htmlAttributes);
+            htmlAttributes = htmlAttributes == null
+                ? new Dictionary<string, object>()
+                : new Dictionary<string, object>(htmlAttributes);
             htmlAttributes["href"] = GetUrl(emailAddress);
             return HtmlBuilder.RenderLinkTag(linkText, htmlAttributes);
         }
