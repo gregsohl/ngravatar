@@ -118,6 +118,16 @@ namespace NGravatar.Tests {
             Assert.AreEqual("twitter", a0.Shortname);
         }
 
+        [Test]
+        public void EntryExists_ReturnsTrueIfExists() {
+            Assert.IsTrue(GetParser().EntryExists());
+        }
+
+        [Test]
+        public void EntryExists_ReturnsFalseForDefaultParser() {
+            Assert.IsFalse(new GravatarProfileParser().EntryExists());
+        }
+
         private GravatarProfileParser GetParser() {
             return new GravatarProfileParser { Entry = GetEntry() };
         }

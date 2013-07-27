@@ -40,45 +40,49 @@ namespace NGravatar {
                 _Entry = value;
             }
         }
-        private XElement _Entry;     
+        private XElement _Entry;
 
-        public string ParseId() {
+        public virtual bool EntryExists() {
+            return ParseId() != null;
+        }
+
+        public virtual string ParseId() {
             return GetValueOrDefault(Entry, "id");
         }
 
-        public string ParseHash() {
+        public virtual string ParseHash() {
             return GetValueOrDefault(Entry, "hash");
         }
 
-        public string ParseRequestHash() {
+        public virtual string ParseRequestHash() {
             return GetValueOrDefault(Entry, "requestHash");
         }
 
-        public string ParseProfileUrl() {
+        public virtual string ParseProfileUrl() {
             return GetValueOrDefault(Entry, "profileUrl");
         }
 
-        public string ParsePreferredUsername() {
+        public virtual string ParsePreferredUsername() {
             return GetValueOrDefault(Entry, "preferredUsername");
         }
 
-        public string ParseThumbnailUrl() {
+        public virtual string ParseThumbnailUrl() {
             return GetValueOrDefault(Entry, "thumbnailUrl");
         }
 
-        public string ParseDisplayName() {
+        public virtual string ParseDisplayName() {
             return GetValueOrDefault(Entry, "displayName");
         }
 
-        public string ParseAboutMe() {
+        public virtual string ParseAboutMe() {
             return GetValueOrDefault(Entry, "aboutMe");
         }
 
-        public string ParseCurrentLocation() {
+        public virtual string ParseCurrentLocation() {
             return GetValueOrDefault(Entry, "currentLocation");
         }
 
-        public GravatarProfileName ParseName() {
+        public virtual GravatarProfileName ParseName() {
             var nameElement = Entry.Elements("name").FirstOrDefault();
             if (nameElement == null) return null;
 
@@ -92,7 +96,7 @@ namespace NGravatar {
             return new GravatarProfileName(formatted, familyName, givenName, middleName, honorificPrefix, honorificSuffix);
         }
 
-        public IEnumerable<GravatarProfileUrl> ParseUrls() {
+        public virtual IEnumerable<GravatarProfileUrl> ParseUrls() {
             return Entry
                 .Elements("urls")
                 .Select(element => 
@@ -103,7 +107,7 @@ namespace NGravatar {
                 );
         }
 
-        public IEnumerable<GravatarProfileEmail> ParseEmails() {
+        public virtual IEnumerable<GravatarProfileEmail> ParseEmails() {
             return Entry
                 .Elements("emails")
                 .Select(element => 
@@ -114,7 +118,7 @@ namespace NGravatar {
                 );
         }
 
-        public IEnumerable<GravatarProfilePhoto> ParsePhotos() {
+        public virtual IEnumerable<GravatarProfilePhoto> ParsePhotos() {
             return Entry
                 .Elements("photos")
                 .Select(element =>
@@ -125,7 +129,7 @@ namespace NGravatar {
                 );
         }
 
-        public IEnumerable<GravatarProfileAccount> ParseAccounts() {
+        public virtual IEnumerable<GravatarProfileAccount> ParseAccounts() {
             return Entry
                 .Elements("accounts")
                 .Select(element =>
