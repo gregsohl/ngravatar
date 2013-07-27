@@ -13,7 +13,7 @@ namespace NGravatar.Html.Tests {
             var email = "ngravatar@kendoll.net";
             var defaultImage = "pathtodefault.img";
             var maxRating = GravatarRating.X;
-            var gravatarSrc = GravatarUrl.Gravatar(null, email, size, defaultImage, maxRating);
+            var gravatarSrc = GravatarUrl.Gravatar(null, email, size, maxRating, defaultImage);
 
             var gravatar = new Gravatar();
             gravatar.Size = size;

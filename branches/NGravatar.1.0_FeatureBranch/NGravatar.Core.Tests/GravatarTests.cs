@@ -69,28 +69,28 @@ namespace NGravatar.Tests {
         [Test]
         public void GetUrl_GetsUrlWithDefaultValues() {
             var actual = new Gravatar().GetUrl("ngravatar@kendoll.net");
-            var expected = "http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5";
+            var expected = "http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5";
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void GetUrl_UsesRating() {
             var actual = new Gravatar().GetUrl("ngravatar@kendoll.net", rating: GravatarRating.R);
-            var expected = "http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&rating=R";
+            var expected = "http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?r=r";
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void GetUrl_UsesSize() {
             var actual = new Gravatar().GetUrl("ngravatar@kendoll.net", size: 43);
-            var expected = "http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&size=43";
+            var expected = "http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?s=43";
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void GetUrl_UsesDefault() {
             var actual = new Gravatar().GetUrl("ngravatar@kendoll.net", @default: "http://my.default.image.jpg");
-            var expected = "http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&default=http%3a%2f%2fmy.default.image.jpg";
+            var expected = "http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?d=http%3a%2f%2fmy.default.image.jpg";
             Assert.AreEqual(expected, actual);
         }
 
@@ -102,7 +102,7 @@ namespace NGravatar.Tests {
                 Size = 94
             };
             var actual = gravatar.GetUrl("ngravatar@kendoll.net");
-            var expected = "http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&rating=PG&size=94&default=https%3a%2f%2fsome.avatar.png%2fimage";
+            var expected = "http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?s=94&r=pg&d=https%3a%2f%2fsome.avatar.png%2fimage";
             Assert.AreEqual(expected, actual);
         }
 
@@ -110,7 +110,7 @@ namespace NGravatar.Tests {
         public void GetUrl_UsesParameterSizeBeforeInstanceSize() {
             var gravatar = new Gravatar { Size = 88 };
             var actual = gravatar.GetUrl("ngravatar@kendoll.net", size: 87);
-            var expected = "http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&size=87";
+            var expected = "http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?s=87";
             Assert.AreEqual(expected, actual);
         }
 
@@ -118,21 +118,29 @@ namespace NGravatar.Tests {
         public void GetUrl_UsesParameterRatingBeforeInstanceRating() {
             var gravatar = new Gravatar { Rating = GravatarRating.G };
             var actual = gravatar.GetUrl("ngravatar@kendoll.net", rating: GravatarRating.X);
-            var expected = "http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&rating=X";
+            var expected = "http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?r=x";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void GetUrl_IncludesForceDefault() {
+            var gravatar = new Gravatar { Default = "my_default.jpg" };
+            var actual = gravatar.GetUrl("ngravatar@kendoll.net", forceDefault: true);
+            var expected = "http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?d=my_default.jpg&f=y";
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void Render_CreatesHtmlElement() {
             var actual = new Gravatar().Render("ngravatar@kendoll.net");
-            var expected = "<img src=\"http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&amp;size=80\" width=\"80\" height=\"80\" />";
+            var expected = "<img src=\"http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?s=80\" width=\"80\" height=\"80\" />";
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void Render_IncludesHtmlAttributes() {
             var actual = new Gravatar().Render("ngravatar@kendoll.net", htmlAttributes: new Dictionary<string, object> { { "class", "class-name" }, { "id", "idValue" } });
-            var expected = "<img class=\"class-name\" id=\"idValue\" src=\"http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&amp;size=80\" width=\"80\" height=\"80\" />";
+            var expected = "<img class=\"class-name\" id=\"idValue\" src=\"http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?s=80\" width=\"80\" height=\"80\" />";
             Assert.AreEqual(expected, actual);
         }
 
@@ -142,7 +150,14 @@ namespace NGravatar.Tests {
                 { "title", "\"><script src=\"oops.js\"></script>\"" }
             };
             var actual = new Gravatar().Render("ngravatar@kendoll.net", htmlAttributes: attrs);
-            var expected = "<img title=\"&quot;>&lt;script src=&quot;oops.js&quot;>&lt;/script>&quot;\" src=\"http://www.gravatar.com/avatar.php?gravatar_id=bccc2b381d103797427c161951be5fa5&amp;size=80\" width=\"80\" height=\"80\" />";
+            var expected = "<img title=\"&quot;>&lt;script src=&quot;oops.js&quot;>&lt;/script>&quot;\" src=\"http://www.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5?s=80\" width=\"80\" height=\"80\" />";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void GetUrl_UsesHttps() {
+            var actual = new Gravatar().GetUrl("ngravatar@kendoll.net", useHttps: true);
+            var expected = "https://secure.gravatar.com/avatar/bccc2b381d103797427c161951be5fa5";
             Assert.AreEqual(expected, actual);
         }
     }

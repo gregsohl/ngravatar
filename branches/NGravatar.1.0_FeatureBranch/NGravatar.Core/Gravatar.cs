@@ -38,6 +38,13 @@ namespace NGravatar {
         }
         private HtmlBuilder _HtmlBuilder;
 
+        internal string GetBaseUrl(bool? useHttps) {
+            useHttps = useHttps ?? UseHttps;
+            return useHttps.HasValue && useHttps.Value
+                ? "https://secure.gravatar.com"
+                : "http://www.gravatar.com";
+        }
+
         /// <summary>
         /// Gets or sets the default instance of <see cref="T:Gravatar"/> used.
         /// </summary>
@@ -93,6 +100,18 @@ namespace NGravatar {
         public string Default { get; set; }
 
         /// <summary>
+        /// Gets or sets a flag that indicates whether or not the default image
+        /// should be forced for all Gravatar avatar images.
+        /// </summary>
+        public bool ForceDefault { get; set; }
+
+        /// <summary>
+        /// Gets or sets a flag that indicates whether or not Gravatar requests
+        /// will use HTTPS.
+        /// </summary>
+        public bool UseHttps { get; set; }
+
+        /// <summary>
         /// Converts the given <paramref name="emailAddress"/> to the hash needed
         /// to get the associated gravatar image.
         /// </summary>
@@ -107,21 +126,30 @@ namespace NGravatar {
         /// </summary>
         /// <param name="emailAddress">The email whose Gravatar image source should be returned.</param>
         /// <param name="size">The size of the Gravatar image, or <c>null</c> to use the default size.</param>
-        /// <param name="default">The location of the default Gravatar image, or <c>null</c> to use the default location.</param>
         /// <param name="rating">The allowed rating of the Gravatar avatar, or <c>null</c> to use the default rating.</param>
+        /// <param name="default">The location of the default Gravatar image, or <c>null</c> to use the default location.</param>
+        /// <param name="forceDefault"><c>true</c> to force the <paramref name="default"/> image to be loaded. Otherwise, <c>false</c>.</param>
+        /// <param name="useHttps"><c>true</c> to use the base HTTPS Gravatar URL. Otherwise, <c>false</c>.</param>
         /// <returns>The URL of the Gravatar for the specified <paramref name="emailAddress"/>.</returns>
-        public string GetUrl(string emailAddress, int? size = null, string @default = null, GravatarRating? rating = null) {
+        public string GetUrl(string emailAddress, int? size = null, GravatarRating? rating = null, string @default = null, bool? forceDefault = null, bool? useHttps = null) {
 
-            var url = string.Format("http://www.gravatar.com/avatar.php?gravatar_id={0}", GetHash(emailAddress));
-
-            rating = rating ?? Rating;
-            if (rating.HasValue) url += "&rating=" + rating.Value;
+            var query = string.Empty;
 
             size = size ?? Size;
-            if (size.HasValue) url += "&size=" + size.Value;
+            if (size.HasValue) query += "s=" + size.Value;
+
+            rating = rating ?? Rating;
+            if (rating.HasValue) query += "&r=" + rating.Value.ToString().ToLower();
 
             @default = @default ?? Default;
-            if (@default != default(string)) url += "&default=" + HttpUtility.UrlEncode(@default);
+            if (@default != null) query += "&d=" + HttpUtility.UrlEncode(@default);
+
+            forceDefault = forceDefault ?? ForceDefault;
+            if (forceDefault.HasValue && forceDefault.Value) query += "&f=y";
+
+            var url = GetBaseUrl(useHttps) + "/" + GetHash(emailAddress);
+
+            if (query != string.Empty) url += "?" + query.TrimStart(new[] { '&' });
 
             return url;
         }
@@ -131,18 +159,19 @@ namespace NGravatar {
         /// </summary>
         /// <param name="emailAddress">The email address whose Gravatar should be rendered.</param>
         /// <param name="size">The size of the Gravatar image, or <c>null</c> to use the default size.</param>
-        /// <param name="default">The location of the default Gravatar image, or <c>null</c> to use the default location.</param>
         /// <param name="rating">The allowed rating of the Gravatar avatar, or <c>null</c> to use the default rating.</param>
+        /// <param name="default">The location of the default Gravatar image, or <c>null</c> to use the default location.</param>
+        /// <param name="forceDefault"><c>true</c> to force the <paramref name="default"/> image to be loaded. Otherwise, <c>false</c>.</param>        
         /// <param name="htmlAttributes">Additional attributes to include in the img tag.</param>
         /// <returns>An HTML img tag of the rendered Gravatar.</returns>
-        public string Render(string emailAddress, int? size = null, string @default = null, GravatarRating? rating = null, IDictionary<string, object> htmlAttributes = null) {
+        public string Render(string emailAddress, int? size = null, GravatarRating? rating = null, string @default = null, bool? forceDefault = null, IDictionary<string, object> htmlAttributes = null) {
 
             size = size ?? Size ?? RenderedSize;
 
             htmlAttributes = htmlAttributes == null
                 ? new Dictionary<string, object>()
                 : new Dictionary<string, object>(htmlAttributes);
-            htmlAttributes["src"] = GetUrl(emailAddress, size, @default, rating);
+            htmlAttributes["src"] = GetUrl(emailAddress, size, rating, @default, forceDefault);
             htmlAttributes["width"] = size;
             htmlAttributes["height"] = size;
 

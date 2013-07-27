@@ -13,8 +13,8 @@ namespace NGravatar {
     /// </summary>
     public class GravatarProfile {
 
-        private XDocument LoadXDocument(string email) {
-            return XDocumentAbstraction.Load(GetXmlApiUrl(email));
+        private XDocument LoadXDocument(string email, bool? useHttps) {
+            return XDocumentAbstraction.Load(GetXmlApiUrl(email, useHttps));
         }
 
         internal XDocumentAbstraction XDocumentAbstraction {
@@ -29,18 +29,6 @@ namespace NGravatar {
         }
         private XDocumentAbstraction _XDocumentAbstraction;
 
-        internal GravatarHasher Hasher {
-            get {
-                if (null == _Hasher) _Hasher = GravatarHasher.DefaultInstance;
-                return _Hasher;
-            }
-            set {
-                if (null == value) throw new ArgumentNullException("Hasher");
-                _Hasher = value;
-            }
-        }
-        private GravatarHasher _Hasher;
-
         internal HtmlBuilder HtmlBuilder {
             get {
                 if (null == _HtmlBuilder) _HtmlBuilder = HtmlBuilder.DefaultInstance;
@@ -53,38 +41,61 @@ namespace NGravatar {
         }
         private HtmlBuilder _HtmlBuilder;
 
+        internal Gravatar GravatarInstance {
+            get {
+                if (null == _GravatarInstance) _GravatarInstance = Gravatar.DefaultInstance;
+                return _GravatarInstance;
+            }
+            set {
+                if (null == value) throw new ArgumentNullException("GravatarInstance");
+                _GravatarInstance = value;
+            }
+        }
+        private Gravatar _GravatarInstance;
+
         /// <summary>
         /// Gets the URL that links to the Gravatar profile of the specified <paramref name="emailAddress"/>.
         /// </summary>
         /// <param name="emailAddress">The email whose profile should be linked.</param>
+        /// <param name="useHttps">
+        /// <c>true</c> to use the HTTPS Gravatar URL. Otherwise, <c>false</c>.
+        /// This value can be <c>null</c> to use the <see cref="Gravatar.UseHttps"/> value
+        /// of the <see cref="Gravatar.DefaultInstance"/>.
+        /// </param>
         /// <returns>The URL of the profile for the specified <paramref name="emailAddress"/>.</returns>
-        public string GetUrl(string emailAddress) {
-            return "http://www.gravatar.com/" + Hasher.Hash(emailAddress);
+        public string GetUrl(string emailAddress, bool? useHttps = null) {
+            var g = GravatarInstance;
+            return g.GetBaseUrl(useHttps) + "/" + g.GetHash(emailAddress);
         }
 
-        public string GetXmlApiUrl(string emailAddress) {
-            return GetUrl(emailAddress) + ".xml";
+        public string GetXmlApiUrl(string emailAddress, bool? useHttps = null) {
+            return GetUrl(emailAddress, useHttps) + ".xml";
         }
 
-        public string GetJsonApiUrl(string emailAddress, string callback) {
+        public string GetJsonApiUrl(string emailAddress, string callback = null, bool? useHttps = null) {
+            var url = GetUrl(emailAddress, useHttps);
             return string.IsNullOrEmpty(callback)
-                ? string.Format("{0}.json", GetUrl(emailAddress))
-                : string.Format("{0}.json?callback={1}", GetUrl(emailAddress), callback);
-        }
-
-        public string GetJsonApiUrl(string emailAddress) {
-            return GetJsonApiUrl(emailAddress, null);
+                ? string.Format("{0}.json", url)
+                : string.Format("{0}.json?callback={1}", url, callback);
         }
 
         /// <summary>
         /// Parses Gravatar profile information for the specified <paramref name="emailAddress"/> into an object.
         /// </summary>
         /// <param name="emailAddress">The email whose profile information should be returned.</param>
+        /// <param name="useHttps">
+        /// <c>true</c> to use the HTTPS Gravatar URL. Otherwise, <c>false</c>.
+        /// This value can be <c>null</c> to use the <see cref="Gravatar.UseHttps"/> value
+        /// of the <see cref="Gravatar.DefaultInstance"/>.
+        /// </param>
         /// <returns>An object that contains information about the Gravatar profile for the specified <paramref name="emailAddress"/>.</returns>
-        public GravatarProfileInformation LoadInformation(string emailAddress) {
+        public GravatarProfileInformation LoadInformation(string emailAddress, bool? useHttps = null) {
             return new GravatarProfileInformation {
                 Parser = new GravatarProfileParser {
-                    Entry = LoadXDocument(emailAddress).Descendants("entry").FirstOrDefault() ?? new XElement("entry")
+                    Entry = XDocumentAbstraction
+                        .Load(GetXmlApiUrl(emailAddress, useHttps))
+                        .Descendants("entry")
+                        .FirstOrDefault() ?? new XElement("entry")
                 }
             };
         }

@@ -42,22 +42,12 @@ namespace NGravatar.Html {
         /// <param name="urlHelper">The UrlHelper object getting the URL.</param>
         /// <param name="emailAddress">The email whose Gravatar source should be returned.</param>
         /// <param name="size">The size of the requested Gravatar.</param>
-        /// <param name="default">The default image to return if no Gravatar is found for the specified <paramref name="emailAddress"/>.</param>
         /// <param name="rating">The maximum Gravatar rating to allow for requested images.</param>
+        /// <param name="default">The default image to return if no Gravatar is found for the specified <paramref name="emailAddress"/>.</param>
+        /// <param name="forceDefault"><c>true</c> to force the <paramref name="default"/> image to be loaded. Otherwise, <c>false</c>.</param>
         /// <returns>The URI of the Gravatar for the email address and parameters.</returns>
-        public static string Gravatar(this UrlHelper urlHelper, string emailAddress, int? size, string @default, GravatarRating? rating) {
-            return GravatarInstance.GetUrl(emailAddress, size, @default, rating);
-        }
-
-        /// <summary>
-        /// Gets the URI of the Gravatar image for the email address and parameters.
-        /// </summary>
-        /// <param name="urlHelper">The UrlHelper object getting the URL.</param>
-        /// <param name="emailAddress">The email whose Gravatar source should be returned.</param>
-        /// <param name="size">The size of the requested Gravatar.</param>
-        /// <returns>The URI of the Gravatar for the email address and parameters.</returns>
-        public static string Gravatar(this UrlHelper urlHelper, string emailAddress, int? size) {
-            return GravatarInstance.GetUrl(emailAddress, size);
+        public static string Gravatar(this UrlHelper urlHelper, string emailAddress, int? size = null, GravatarRating? rating = null, string @default = null, bool? forceDefault = null) {
+            return GravatarInstance.GetUrl(emailAddress, size, rating, @default, forceDefault);
         }
 
         /// <summary>
