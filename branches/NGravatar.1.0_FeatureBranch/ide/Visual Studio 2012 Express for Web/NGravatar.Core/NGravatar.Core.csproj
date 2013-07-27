@@ -44,29 +44,29 @@
     <Compile Include="..\..\..\NGravatar.Core\Abstractions\Xml\Linq\XDocumentAbstraction.cs">
       <Link>Abstractions\Xml\Linq\XDocumentAbstraction.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileInformation.cs">
-      <Link>GravatarProfileInformation.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core\ProfileInformation\GravatarProfileInformation.cs">
+      <Link>ProfileInformation\GravatarProfileInformation.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileParser.cs">
-      <Link>GravatarProfileParser.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core\ProfileInformation\GravatarProfileParser.cs">
+      <Link>ProfileInformation\GravatarProfileParser.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\GravatarProfilePluralField.cs">
-      <Link>GravatarProfilePluralField.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core\ProfileInformation\GravatarProfilePluralField.cs">
+      <Link>ProfileInformation\GravatarProfilePluralField.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileUrl.cs">
-      <Link>GravatarProfileUrl.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core\ProfileInformation\GravatarProfileUrl.cs">
+      <Link>ProfileInformation\GravatarProfileUrl.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileEmail.cs">
-      <Link>GravatarProfileEmail.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core\ProfileInformation\GravatarProfileEmail.cs">
+      <Link>ProfileInformation\GravatarProfileEmail.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\GravatarProfilePhoto.cs">
-      <Link>GravatarProfilePhoto.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core\ProfileInformation\GravatarProfilePhoto.cs">
+      <Link>ProfileInformation\GravatarProfilePhoto.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileAccount.cs">
-      <Link>GravatarProfileAccount.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core\ProfileInformation\GravatarProfileAccount.cs">
+      <Link>ProfileInformation\GravatarProfileAccount.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\GravatarProfileName.cs">
-      <Link>GravatarProfileName.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core\ProfileInformation\GravatarProfileName.cs">
+      <Link>ProfileInformation\GravatarProfileName.cs</Link>
     </Compile>
     <Compile Include="..\..\..\NGravatar.Core\GravatarHasher.cs">
       <Link>GravatarHasher.cs</Link>
