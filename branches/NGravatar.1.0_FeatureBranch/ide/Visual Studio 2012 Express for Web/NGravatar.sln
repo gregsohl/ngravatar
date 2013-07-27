@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGravatar", "NGravatar\NGra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGravatar.Tests", "NGravatar.Tests\NGravatar.Tests.csproj", "{2362E055-1FEB-4EE9-883F-EE4C7FD75189}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGravatar.Sample", "NGravatar.Sample\NGravatar.Sample.csproj", "{0B4851AF-FC91-40E9-82DD-75FE82241DDB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{2362E055-1FEB-4EE9-883F-EE4C7FD75189}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2362E055-1FEB-4EE9-883F-EE4C7FD75189}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2362E055-1FEB-4EE9-883F-EE4C7FD75189}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B4851AF-FC91-40E9-82DD-75FE82241DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B4851AF-FC91-40E9-82DD-75FE82241DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B4851AF-FC91-40E9-82DD-75FE82241DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B4851AF-FC91-40E9-82DD-75FE82241DDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
