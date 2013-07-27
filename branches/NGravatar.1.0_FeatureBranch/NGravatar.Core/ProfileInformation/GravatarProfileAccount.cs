@@ -1,6 +1,6 @@
 using System;
 
-namespace NGravatar {
+namespace NGravatar.ProfileInformation {
 
     /// <summary>
     /// A field in a Gravatar profile that provides information about a user's account.

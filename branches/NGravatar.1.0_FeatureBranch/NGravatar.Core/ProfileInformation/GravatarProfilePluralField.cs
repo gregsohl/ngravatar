@@ -1,6 +1,6 @@
 using System;
 
-namespace NGravatar {
+namespace NGravatar.ProfileInformation {
 
     /// <summary>
     /// A field of a Gravatar profile that may have more than one instance per profile.

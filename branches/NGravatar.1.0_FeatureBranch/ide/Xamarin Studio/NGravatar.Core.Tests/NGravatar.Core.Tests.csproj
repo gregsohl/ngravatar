@@ -43,6 +43,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="ProfileInformation\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\NGravatar.Core.Tests\Properties\AssemblyInfo.cs">
@@ -54,32 +55,32 @@
     <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarTests.cs">
       <Link>GravatarTests.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfilePluralFieldTests.cs">
-      <Link>GravatarProfilePluralFieldTests.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileUrlTests.cs">
-      <Link>GravatarProfileUrlTests.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfilePhotoTests.cs">
-      <Link>GravatarProfilePhotoTests.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileNameTests.cs">
-      <Link>GravatarProfileNameTests.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileEmailTests.cs">
-      <Link>GravatarProfileEmailTests.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileAccountTests.cs">
-      <Link>GravatarProfileAccountTests.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileParserTests.cs">
-      <Link>GravatarProfileParserTests.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileTests.cs">
       <Link>GravatarProfileTests.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarProfileInformationTests.cs">
-      <Link>GravatarProfileInformationTests.cs</Link>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileAccountTests.cs">
+      <Link>ProfileInformation\GravatarProfileAccountTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileEmailTests.cs">
+      <Link>ProfileInformation\GravatarProfileEmailTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileInformationTests.cs">
+      <Link>ProfileInformation\GravatarProfileInformationTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileNameTests.cs">
+      <Link>ProfileInformation\GravatarProfileNameTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileParserTests.cs">
+      <Link>ProfileInformation\GravatarProfileParserTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfilePhotoTests.cs">
+      <Link>ProfileInformation\GravatarProfilePhotoTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfilePluralFieldTests.cs">
+      <Link>ProfileInformation\GravatarProfilePluralFieldTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileUrlTests.cs">
+      <Link>ProfileInformation\GravatarProfileUrlTests.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

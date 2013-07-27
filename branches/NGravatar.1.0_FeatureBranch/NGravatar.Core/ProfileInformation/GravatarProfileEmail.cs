@@ -1,6 +1,6 @@
 using System;
 
-namespace NGravatar {
+namespace NGravatar.ProfileInformation {
 
     /// <summary>
     /// An email field in a Gravatar profile.

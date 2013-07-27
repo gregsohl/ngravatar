@@ -1,6 +1,6 @@
 using System;
 
-namespace NGravatar {
+namespace NGravatar.ProfileInformation {
 
     /// <summary>
     /// A URL field in a Gravatar profile.

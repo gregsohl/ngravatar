@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 using NGravatar.Utils;
 using NGravatar.Abstractions.Xml.Linq;
+using NGravatar.ProfileInformation;
 
 namespace NGravatar {
 

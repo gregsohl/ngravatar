@@ -1,6 +1,6 @@
 using System;
 
-namespace NGravatar {
+namespace NGravatar.ProfileInformation {
     
     /// <summary>
     /// A photo field in a Gravatar profile.

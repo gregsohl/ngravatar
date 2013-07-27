@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml.Linq;
 using System.Collections.Generic;
 
-namespace NGravatar {
+namespace NGravatar.ProfileInformation {
 
     /// <summary>
     /// Gravatar profile information object.

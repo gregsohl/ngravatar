@@ -4,7 +4,7 @@ using System.Linq;
 
 using NUnit.Framework;
 
-namespace NGravatar.Tests {
+namespace NGravatar.ProfileInformation.Tests {
 
     [TestFixture]
     public class GravatarProfileParserTests {

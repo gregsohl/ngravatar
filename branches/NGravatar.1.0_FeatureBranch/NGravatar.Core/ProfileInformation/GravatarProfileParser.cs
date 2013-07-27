@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace NGravatar {
+namespace NGravatar.ProfileInformation {
 
     internal class GravatarProfileParser {
       
