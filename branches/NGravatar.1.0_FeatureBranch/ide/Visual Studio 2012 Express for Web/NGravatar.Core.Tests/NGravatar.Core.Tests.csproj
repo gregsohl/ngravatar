@@ -72,6 +72,9 @@
     <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileInformationTests.cs">
       <Link>ProfileInformation\GravatarProfileInformationTests.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\Abstractions\Xml\Linq\XDocumentAbstractionTests.cs">
+      <Link>Abstractions\Xml\Linq\XDocumentAbstractionTests.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NGravatar.Core\NGravatar.Core.csproj">

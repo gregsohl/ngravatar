@@ -20,13 +20,14 @@ namespace NGravatar.Abstractions.Xml.Linq.Tests {
         public void Load_LoadsXDocument() {
             var tempFile = Path.GetTempFileName();
             try {
-                File.WriteAllText(tempFile, @"<?xml version='1.0' encoding='utf-8'?>
-                    <rootelement>
-                        <element1>
-                            <value1>1000</value1>
-                        </element1>
-                    </rootelement>                    
-                ");
+                File.WriteAllText(tempFile, 
+                    @"<?xml version='1.0' encoding='utf-8'?>
+                        <rootelement>
+                            <element1>
+                                <value1>1000</value1>
+                            </element1>
+                        </rootelement>" 
+                );
                 var actual = XDocumentAbstraction.DefaultInstance.Load(tempFile).ToString();
                 var expected = XDocument.Load(tempFile).ToString();
                 Assert.AreEqual(expected, actual);
