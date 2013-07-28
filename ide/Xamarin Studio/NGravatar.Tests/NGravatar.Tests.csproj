@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2362E055-1FEB-4EE9-883F-EE4C7FD75189}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NGravatar.Tests</RootNamespace>
+    <AssemblyName>NGravatar.Tests</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.3.0.20105.1\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Html\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\NGravatar.Tests\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Tests\Html\GravatarHtmlTests.cs">
+      <Link>Html\GravatarHtmlTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Tests\Html\GravatarUrlTests.cs">
+      <Link>Html\GravatarUrlTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Tests\Utils\HtmlAttributeTypeFilterTests.cs">
+      <Link>Utils\HtmlAttributeTypeFilterTests.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NGravatar\NGravatar.csproj">
+      <Project>{C73506AC-116F-40BF-AF1F-829923D84F87}</Project>
+      <Name>NGravatar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NGravatar.Core\NGravatar.Core.csproj">
+      <Project>{FC4062C5-868C-4CF4-989D-ED0BF3DB9748}</Project>
+      <Name>NGravatar.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
