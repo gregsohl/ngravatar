@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package >
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>NGravatar</id>
         <version>1.0.0</version>
@@ -35,5 +35,9 @@
         </releaseNotes>
         <copyright>Copyright (c) Ken Yourek 2013</copyright>
         <tags>NGravatar Gravatar avatar MVC HtmlHelper UrlHelper</tags>
+        <dependencies>
+            <dependency id="NGravatar.Core" version="1.0.0" />
+            <dependency id="Microsoft.AspNet.Mvc" version="3.0.20105.1" />
+        </dependencies>        
     </metadata>
 </package>
