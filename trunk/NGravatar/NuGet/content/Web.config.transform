@@ -1,9 +1,0 @@
-﻿<configuration>
-  <system.web>
-    <pages>
-	  <namespaces>
-	    <add namespace="NGravatar.Html" />
-	  </namespaces>
-	</pages>
-  </system.web>
-</configuration>

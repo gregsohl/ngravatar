@@ -1,7 +1,7 @@
 *******
 License
 *******
-Copyright (c) <2012> <Ken Yourek>
+Copyright (c) <2013> <Ken Yourek>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
 of this software and associated documentation files (the "Software"), to deal 
@@ -36,15 +36,22 @@ First, include the NGravatar.Html namespace in your Web.config, like so:
     <add namespace="NGravatar.Html" />
 </namespaces>
 
-Then, use the HtmlHelper extension method to render a full Gravatar image by email:
-<%= Html.Gravatar("some@email.com", null) %>
+Then, use the HtmlHelper extension method to render a full Gravatar image by email address:
+@Html.Gravatar("some@email.com", null)
 
 Or, just get the Gravatar source with the UrlHelper extension method:
-<img src="<%=Url.Gravatar("ngravatar@kendoll.net", 340) %>" alt="NGravatar Gravatar" />
+<img src="@Url.Gravatar("ngravatar@kendoll.net", 340)" alt="NGravatar Gravatar" />
 
 **********
 Change Log
 **********
+-- 1.0.0
+-- 27 July 2013
+-- Rewrote the code to be cleaner, easier to maintain, easier to
+   extend, easier to understand, easier to test, etc. There are
+   lots of breaking changes here. To avoid those changes, don't
+   update past version 0.x.x.
+
 -- 0.3.2
 -- 5 December 2012
 -- Ken Yourek
