@@ -40,6 +40,7 @@
   <ItemGroup>
     <Folder Include="Properties\" />
     <Folder Include="Html\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\NGravatar\Properties\AssemblyInfo.cs">
@@ -50,6 +51,9 @@
     </Compile>
     <Compile Include="..\..\..\NGravatar\Html\GravatarUrl.cs">
       <Link>Html\GravatarUrl.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar\Utils\HtmlAttributeTypeFilter.cs">
+      <Link>Utils\HtmlAttributeTypeFilter.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

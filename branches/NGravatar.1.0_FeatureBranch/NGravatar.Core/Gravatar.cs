@@ -40,7 +40,7 @@ namespace NGravatar {
 
         internal string GetBaseUrl(bool? useHttps) {
             useHttps = useHttps ?? UseHttps;
-            return useHttps.HasValue && useHttps.Value
+            return (useHttps.HasValue && useHttps.Value)
                 ? "https://secure.gravatar.com"
                 : "http://www.gravatar.com";
         }
@@ -147,11 +147,11 @@ namespace NGravatar {
             forceDefault = forceDefault ?? ForceDefault;
             if (forceDefault.HasValue && forceDefault.Value) query += "&f=y";
 
-            var url = GetBaseUrl(useHttps) + "/avatar/" + GetHash(emailAddress);
-
-            if (query != string.Empty) url += "?" + query.TrimStart(new[] { '&' });
-
-            return url;
+            return string.Format("{0}/avatar/{1}{2}", GetBaseUrl(useHttps), GetHash(emailAddress), 
+                query == string.Empty
+                    ? string.Empty
+                    : "?" + query.TrimStart(new[] { '&' })
+            );
         }
 
         /// <summary>

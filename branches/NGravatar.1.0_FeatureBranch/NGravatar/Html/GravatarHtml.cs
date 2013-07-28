@@ -5,6 +5,8 @@ using System.Web.Routing;
 using System.Linq;
 using System.Collections.Generic;
 
+using NGravatar.Utils;
+
 namespace NGravatar.Html {
 
     /// <summary>
@@ -12,16 +14,17 @@ namespace NGravatar.Html {
     /// </summary>
     public static class GravatarHtml {
 
-        private static IDictionary<string, object> CreateDictionary(object htmlAttributes) {
-            if (null == htmlAttributes) return null;
-
-            var collection = htmlAttributes as IEnumerable<KeyValuePair<string, object>>;
-            return (collection ?? new RouteValueDictionary(htmlAttributes))
-                .ToDictionary(pair => 
-                    pair.Key, 
-                    pair => pair.Value
-                );
+        internal static HtmlAttributeTypeFilter HtmlAttributeTypeFilter {
+            get {
+                if (null == _HtmlAttributeTypeFilter) _HtmlAttributeTypeFilter = new HtmlAttributeTypeFilter();
+                return _HtmlAttributeTypeFilter;
+            }
+            set {
+                if (null == value) throw new ArgumentNullException("HtmlAttributeTypeFilter");
+                _HtmlAttributeTypeFilter = value;
+            }
         }
+        private static HtmlAttributeTypeFilter _HtmlAttributeTypeFilter;
 
         internal static GravatarProfile GravatarProfile {
             get {
@@ -65,7 +68,7 @@ namespace NGravatar.Html {
                     @default,
                     forceDefault,
                     useHttps,
-                    CreateDictionary(htmlAttributes)
+                    HtmlAttributeTypeFilter.FilterToDictionary(htmlAttributes)
                 )
             );
         }
@@ -79,8 +82,21 @@ namespace NGravatar.Html {
         /// <param name="useHttps"><c>true</c> to use the HTTPS Gravatar URL. Otherwise, <c>false</c>.</param>
         /// <param name="htmlAttributes">Additional attributes to include in the rendered tag.</param>
         /// <returns>An HTML string of the rendered link tag.</returns>
-        public static MvcHtmlString GravatarProfileLink(this HtmlHelper htmlHelper, string emailAddress, string linkText, bool? useHttps = null, object htmlAttributes = null) {
-            return MvcHtmlString.Create(GravatarProfile.RenderLink(emailAddress, linkText, useHttps, CreateDictionary(htmlAttributes)));
+        public static MvcHtmlString GravatarProfileLink(
+            this HtmlHelper htmlHelper, 
+            string emailAddress, 
+            string linkText, 
+            bool? useHttps = null, 
+            object htmlAttributes = null
+        ) {
+            return MvcHtmlString.Create(
+                GravatarProfile.RenderLink(
+                    emailAddress, 
+                    linkText, 
+                    useHttps, 
+                    HtmlAttributeTypeFilter.FilterToDictionary(htmlAttributes)
+                )
+            );
         }
 
         /// <summary>
@@ -91,8 +107,19 @@ namespace NGravatar.Html {
         /// <param name="callback">A JavaScript function that will be called with the JSON data as a parameter when it is rendered.</param>
         /// <param name="useHttps"><c>true</c> to use the HTTPS Gravatar URL. Otherwise, <c>false</c>.</param>
         /// <returns>An HTML script tag that can be included in a page.</returns>
-        public static MvcHtmlString GravatarProfileScript(this HtmlHelper htmlHelper, string emailAddress, string callback, bool? useHttps = null) {
-            return MvcHtmlString.Create(GravatarProfile.RenderScript(emailAddress, callback, useHttps));
+        public static MvcHtmlString GravatarProfileScript(
+            this HtmlHelper htmlHelper, 
+            string emailAddress, 
+            string callback, 
+            bool? useHttps = null
+        ) {
+            return MvcHtmlString.Create(
+                GravatarProfile.RenderScript(
+                    emailAddress, 
+                    callback, 
+                    useHttps
+                )
+            );
         }
     }
 }
