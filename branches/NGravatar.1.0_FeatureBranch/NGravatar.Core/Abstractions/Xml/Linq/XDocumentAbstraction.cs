@@ -6,8 +6,8 @@ namespace NGravatar.Abstractions.Xml.Linq {
 
         protected XDocumentAbstraction() { }
 
-        public static XDocumentAbstraction Default { get { return _Default; } }
-        private static readonly XDocumentAbstraction _Default = new XDocumentAbstraction();
+        public static XDocumentAbstraction DefaultInstance { get { return _DefaultInstance; } }
+        private static readonly XDocumentAbstraction _DefaultInstance = new XDocumentAbstraction();
 
         public virtual XDocument Load(string uri) {
             return XDocument.Load(uri);

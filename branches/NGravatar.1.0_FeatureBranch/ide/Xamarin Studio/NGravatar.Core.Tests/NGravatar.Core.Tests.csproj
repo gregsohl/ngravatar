@@ -44,6 +44,7 @@
   <ItemGroup>
     <Folder Include="Properties\" />
     <Folder Include="ProfileInformation\" />
+    <Folder Include="Abstractions\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\NGravatar.Core.Tests\Properties\AssemblyInfo.cs">
@@ -81,6 +82,9 @@
     </Compile>
     <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileUrlTests.cs">
       <Link>ProfileInformation\GravatarProfileUrlTests.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\Abstractions\Xml\Linq\XDocumentAbstractionTests.cs">
+      <Link>Abstractions\Xml\Linq\XDocumentAbstractionTests.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@ namespace NGravatar {
 
         internal XDocumentAbstraction XDocumentAbstraction {
             get {
-                if (null == _XDocumentAbstraction) _XDocumentAbstraction = XDocumentAbstraction.Default;
+                if (null == _XDocumentAbstraction) _XDocumentAbstraction = XDocumentAbstraction.DefaultInstance;
                 return _XDocumentAbstraction;
             }
             set {
