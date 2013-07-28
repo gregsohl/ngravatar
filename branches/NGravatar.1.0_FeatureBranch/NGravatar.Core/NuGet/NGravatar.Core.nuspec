@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>NGravatar.Core</id>
+        <version>1.0.0</version>
+        <authors>Ken Yourek</authors>
+        <owners>Ken Yourek</owners>
+        <licenseUrl>http://code.google.com/p/ngravatar/source/browse/trunk/NGravatar.Core/License.txt</licenseUrl>
+        <projectUrl>http://code.google.com/p/ngravatar/</projectUrl>
+        <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>
+            NGravatar.Core provides methods for interacting with the Gravatar API on .NET. This is the core
+            library used by NGravatar for MVC extension methods. To get those methods, install the NGravatar
+            package.
+        </description>
+        <releaseNotes>
+            Version 1.x.x is a complete rewrite of NGravatar with many breaking changes. To prevent these changes
+            from affecting your code, don't update past version 0.x.x. Instructions on how to do so can be found
+            here: http://stackoverflow.com/questions/10206090/how-to-install-an-older-version-of-a-nuget-package/
+        </releaseNotes>
+        <copyright>Copyright Ken Yourek 2013</copyright>
+        <tags>NGravatar Gravatar avatar</tags>
+    </metadata>
+</package>
