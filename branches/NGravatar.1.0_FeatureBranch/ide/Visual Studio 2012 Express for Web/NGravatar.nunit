@@ -1,7 +1,7 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Default" processModel="Default" domainUsage="Default" appbase="C:\Users\ken\Projects\NGravatar\svn\branches\NGravatar.1.0_FeatureBranch\ide\Visual Studio 2012 Express for Web" />
+  <Settings activeconfig="Default" processModel="Default" domainUsage="Default" />
   <Config name="Default" binpathtype="Auto" runtimeFramework="v0.0">
-    <assembly path="NGravatar.Tests\bin\Debug\NGravatar.Tests.dll" />
-    <assembly path="NGravatar.Core.Tests\bin\Debug\NGravatar.Core.Tests.dll" />
+    <assembly path="NGravatar.Tests\bin\NGravatar.Tests.dll" />
+    <assembly path="NGravatar.Core.Tests\bin\NGravatar.Core.Tests.dll" />
   </Config>
 </NUnitProject>
