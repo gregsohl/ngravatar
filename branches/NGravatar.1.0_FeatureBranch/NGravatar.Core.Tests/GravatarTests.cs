@@ -3,10 +3,17 @@ using System.Collections.Generic;
 
 using NUnit.Framework;
 
+using NGravatar.Utils;
+
 namespace NGravatar.Tests {
 
     [TestFixture]
     public class GravatarTests {
+
+        [Test]
+        public void HtmlBuilder_IsInitiallyDefaultInstance() {
+            Assert.AreSame(HtmlBuilder.DefaultInstance, new Gravatar().HtmlBuilder);
+        }
 
         [Test]
         public void DefaultInstance_IsInitiallyDefault() {
