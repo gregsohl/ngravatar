@@ -19,7 +19,7 @@
             from affecting your code, don't update past version 0.x.x. Instructions on how to do so can be found
             here: http://stackoverflow.com/questions/10206090/how-to-install-an-older-version-of-a-nuget-package/
         </releaseNotes>
-        <copyright>Copyright Ken Yourek 2013</copyright>
+        <copyright>Copyright (c) Ken Yourek 2013</copyright>
         <tags>NGravatar Gravatar avatar</tags>
     </metadata>
 </package>
