@@ -130,13 +130,15 @@
 </p>
 <pre>
 @("@{ NGravatar.Gravatar.DefaultInstance.UseHttps = true; }")
-@("@Html.Gravatar(\"ngravatar@kendoll.net\", useHttps: true);")
+@("@Html.Gravatar(\"ngravatar@kendoll.net\");")
 @("<br />")
+@("@{ NGravatar.Gravatar.DefaultInstance.UseHttps = false; }")
 @("@Url.Gravatar(\"ngravatar@kendoll.net\", useHttps: true)")
 </pre>
 @{ NGravatar.Gravatar.DefaultInstance.UseHttps = true; }
-@Html.Gravatar("ngravatar@kendoll.net", useHttps: true)
+@Html.Gravatar("ngravatar@kendoll.net")
 <br />
+@{ NGravatar.Gravatar.DefaultInstance.UseHttps = false; }
 @Url.Gravatar("ngravatar@kendoll.net", useHttps: true)
 
 <hr />
@@ -144,7 +146,19 @@
 <h4>Get Gravatar profile information.</h4>
 <p>
     NGravatar also includes methods to retrieve Gravatar profile information for an email address.
+    Profile information is passed via an XML or JSON API and parsed into POCO objects.
 </p>
+<pre>
+@("@{ var profile = new NGravatar.GravatarProfile().LoadInformation(\"ngravatar@kendoll.net\"); }")
+@("<ul>")
+    @("<li>Id: @profile.Id</li>")
+    @("<li>Hash: @profile.Hash</li>")
+    @("<li>Formatted Name: @profile.Name.Formatted</li>")
+    @("@foreach (var photo in profile.Photos) {")
+        @("<li>Photo: <img src=\"@photo.Value\" /></li>")
+    @("}")
+@("</ul>")
+</pre>
 @{ var profile = new NGravatar.GravatarProfile().LoadInformation("ngravatar@kendoll.net"); }
 <ul>
     <li>Id: @profile.Id</li>
