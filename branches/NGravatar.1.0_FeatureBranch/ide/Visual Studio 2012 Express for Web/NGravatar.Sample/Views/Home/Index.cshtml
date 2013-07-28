@@ -83,3 +83,58 @@
     NGravatar.Gravatar.DefaultInstance.Default = "http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100";
 }
 @Html.Gravatar("`not%an#email$address`", 100);
+
+<p>
+    To remove site-wide settings, set the DefaultInstance properties to null.
+</p>
+<pre>
+@("@{")
+    @("NGravatar.Gravatar.DefaultInstance.Rating = null;")
+    @("NGravatar.Gravatar.DefaultInstance.Default = null;")
+@("}")
+</pre>
+@{ 
+    NGravatar.Gravatar.DefaultInstance.Rating = null; 
+    NGravatar.Gravatar.DefaultInstance.Default = null;
+}
+
+<p>
+    The Gravatar documentation <a href="https://en.gravatar.com/site/implement/images/">here</a> explains some additional
+    options for the default image. These strings can be passed in place of an image URL to get the effect described below.
+</p>
+<ul>
+    <li>404: do not load any image if none is associated with the email hash, instead return an HTTP 404 (File Not Found) response</li>
+    <li>mm: (mystery-man) a simple, cartoon-style silhouetted outline of a person (does not vary by email hash)</li>
+    <li>identicon: a geometric pattern based on an email hash</li>
+    <li>monsterid: a generated 'monster' with different colors, faces, etc</li>
+    <li>wavatar: generated faces with differing features and backgrounds</li>
+    <li>retro: awesome generated, 8-bit arcade-style pixelated faces</li>
+    <li>blank: a transparent PNG image (border added to HTML below for demonstration purposes)</li>
+</ul>
+<pre>
+@("@Html.Gravatar(\"na\", @default: \"404\") @Html.Gravatar(\"na\", @default: \"mm\") @Html.Gravatar(\"na\", @default: \"identicon\")")
+@("@Html.Gravatar(\"na\", @default: \"monsterid\") @Html.Gravatar(\"na\", @default: \"wavatar\") @Html.Gravatar(\"na\", @default: \"retro\")")
+@("@Html.Gravatar(\"na\", @default: \"blank\", htmlAttributes: new { style = \"border: 1px solid black\" })")
+</pre>
+@Html.Gravatar("na", @default: "404") @Html.Gravatar("na", @default: "mm") @Html.Gravatar("na", @default: "identicon")
+@Html.Gravatar("na", @default: "monsterid") @Html.Gravatar("na", @default: "wavatar") @Html.Gravatar("na", @default: "retro")
+@Html.Gravatar("na", @default: "blank", htmlAttributes: new { style = "border: 1px solid black" })
+
+<hr />
+
+<h4>Use HTTPS.</h4>
+<p>
+    You can use Gravatar's HTTPS URL by setting the useHttps flag to true. This is also a value that can be set
+    site-wide by using the UseHttps property of the Gravatar DefaultInstance. This is useful if your site requires
+    HTTPS. Set it once and forget it.
+</p>
+<pre>
+@("@{ NGravatar.Gravatar.DefaultInstance.UseHttps = true; }")
+@("@Html.Gravatar(\"ngravatar@kendoll.net\", useHttps: true);")
+@("<br />")
+@("@Url.Gravatar(\"ngravatar@kendoll.net\", useHttps: true)")
+</pre>
+@{ NGravatar.Gravatar.DefaultInstance.UseHttps = true; }
+@Html.Gravatar("ngravatar@kendoll.net", useHttps: true)
+<br />
+@Url.Gravatar("ngravatar@kendoll.net", useHttps: true)
