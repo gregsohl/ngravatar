@@ -72,6 +72,9 @@
     <Compile Include="..\..\..\NGravatar.Core.Tests\ProfileInformation\GravatarProfileInformationTests.cs">
       <Link>ProfileInformation\GravatarProfileInformationTests.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\Utils\HtmlBuilderTests.cs">
+      <Link>Utils\HtmlBuilderTests.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\NGravatar.Core.Tests\Abstractions\Xml\Linq\XDocumentAbstractionTests.cs">
       <Link>Abstractions\Xml\Linq\XDocumentAbstractionTests.cs</Link>
     </Compile>

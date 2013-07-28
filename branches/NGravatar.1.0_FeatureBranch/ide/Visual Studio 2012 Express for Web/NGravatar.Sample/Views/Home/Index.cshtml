@@ -168,3 +168,31 @@
         <li>Photo: <img src="@photo.Value" /></li>
     }
 </ul>
+
+<p>
+    Or, just provide a link to the profile.
+</p>
+<pre>
+@("@Html.GravatarProfileLink(\"ngravatar@kendoll.net\", \"My Gravatar profile!\")")
+</pre>
+@Html.GravatarProfileLink("ngravatar@kendoll.net", "My Gravatar profile!")
+
+<p>
+    Or, use a script to process the profile information. This is done by creating a
+    script tag and specifiying the callback function that processes the result from
+    the Gravatar API.
+</p>
+<pre>
+@("<script type=\"text/javascript\">")
+    @("function processGravatarProfile(response) {")
+        @("console.log(response);")
+    @("}")
+@("</script>")
+@("@Html.GravatarProfileScript(\"ngravatar@kendoll.net\", \"processGravatarProfile\")")
+</pre>
+<script type="text/javascript">
+    function processGravatarProfile(response) {
+        console.log(response);
+    }
+</script>
+@Html.GravatarProfileScript("ngravatar@kendoll.net", "processGravatarProfile")
