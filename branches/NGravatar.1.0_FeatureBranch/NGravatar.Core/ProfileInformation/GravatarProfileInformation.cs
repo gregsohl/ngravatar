@@ -97,25 +97,25 @@ namespace NGravatar.ProfileInformation {
         /// <summary>
         /// Gets a collection of URLs associated with this profile.
         /// </summary>
-        public IEnumerable<GravatarProfileUrl> Urls { get { return _Urls ?? (_Urls = Parser.ParseUrls()); } }
+        public IEnumerable<GravatarProfileUrl> Urls { get { return _Urls ?? (_Urls = Parser.ParseUrls().ToList()); } }
         private IEnumerable<GravatarProfileUrl> _Urls;
 
         /// <summary>
         /// Gets a collection of emails associated with this profile.
         /// </summary>
-        public IEnumerable<GravatarProfileEmail> Emails { get { return _Emails ?? (_Emails = Parser.ParseEmails()); } }
+        public IEnumerable<GravatarProfileEmail> Emails { get { return _Emails ?? (_Emails = Parser.ParseEmails().ToList()); } }
         private IEnumerable<GravatarProfileEmail> _Emails;
 
         /// <summary>
         /// Gets a collection of photos associated with this profile.
         /// </summary>
-        public IEnumerable<GravatarProfilePhoto> Photos { get { return _Photos ?? (_Photos = Parser.ParsePhotos()); } }
+        public IEnumerable<GravatarProfilePhoto> Photos { get { return _Photos ?? (_Photos = Parser.ParsePhotos().ToList()); } }
         private IEnumerable<GravatarProfilePhoto> _Photos;
 
         /// <summary>
         /// Gets a collection of accounts associated with this profile.
         /// </summary>
-        public IEnumerable<GravatarProfileAccount> Accounts { get { return _Accounts ?? (_Accounts = Parser.ParseAccounts()); } }
+        public IEnumerable<GravatarProfileAccount> Accounts { get { return _Accounts ?? (_Accounts = Parser.ParseAccounts().ToList()); } }
         private IEnumerable<GravatarProfileAccount> _Accounts;
 
         public override string ToString() {

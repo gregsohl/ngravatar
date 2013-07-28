@@ -14,7 +14,7 @@ namespace NGravatar.Tests {
 
         [Test]
         public void XDocumentAbstraction_IsInitiallyInstance() {
-            // Assert.AreEqual(typeof(XDocumentAbstraction), new GravatarProfile().XDocumentAbstraction.GetType());
+            Assert.AreEqual(typeof(XDocumentAbstraction), new GravatarProfile().XDocumentAbstraction.GetType());
         }
 
         [Test]
