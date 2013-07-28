@@ -118,6 +118,10 @@ namespace NGravatar.ProfileInformation {
         public IEnumerable<GravatarProfileAccount> Accounts { get { return _Accounts ?? (_Accounts = Parser.ParseAccounts().ToList()); } }
         private IEnumerable<GravatarProfileAccount> _Accounts;
 
+        /// <summary>
+        /// Returns the <see cref="GravatarProfileInformation.DisplayName"/>.
+        /// </summary>
+        /// <returns>The <see cref="GravatarProfileInformation.DisplayName"/>.</returns>
         public override string ToString() {
             return DisplayName;
         }
