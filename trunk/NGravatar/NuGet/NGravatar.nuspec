@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>NGravatar</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>NGravatar</title>
         <authors>Ken Yourek</authors>
         <owners>Ken Yourek</owners>
@@ -14,7 +14,7 @@
             <![CDATA[
                 NGravatar provides MVC HtmlHelper and UrlHelper extension methods for rendering Gravatar avatars from gravatar.com. The project is licensed under the MIT open-source license and is hosted at Google Code. See http://code.google.com/p/ngravatar/ for more information. 
 
-                Gravatars are retrieved based on an email address and optional parameters. A rendered Gravatar on an MVC view page might look something like:
+                Gravatar avatars are retrieved based on an email address and optional parameters. A rendered Gravatar avatar on an MVC view page might look something like:
 
                 @Html.Gravatar("ngravatar@kendoll.net", 80, htmlAttributes: new { style = "border:10px solid blue;" })
 
@@ -30,7 +30,7 @@
         <copyright>Copyright (c) Ken Yourek 2013</copyright>
         <tags>NGravatar Gravatar avatar MVC HtmlHelper UrlHelper</tags>
         <dependencies>
-            <dependency id="NGravatar.Core" version="1.0.0" />
+            <dependency id="NGravatar.Core" version="1.0.1" />
             <dependency id="Microsoft.AspNet.Mvc" version="3.0.20105.1" />
         </dependencies>        
     </metadata>
