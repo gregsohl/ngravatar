@@ -44,9 +44,9 @@
     <Compile Include="..\..\..\NGravatar\Utils\HtmlAttributeTypeFilter.cs">
       <Link>Utils\HtmlAttributeTypeFilter.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar\NuGet\NGravatar.nuspec">
+    <None Include="..\..\..\NGravatar\NuGet\NGravatar.nuspec">
       <Link>NuGet\NGravatar.nuspec</Link>
-    </Compile>    
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NGravatar.Core\NGravatar.Core.csproj">

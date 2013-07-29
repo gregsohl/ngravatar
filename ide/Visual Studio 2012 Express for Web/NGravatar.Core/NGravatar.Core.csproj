@@ -75,9 +75,9 @@
     <Compile Include="..\..\..\NGravatar.Core\Utils\HtmlBuilder.cs">
       <Link>Utils\HtmlBuilder.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\NGravatar.Core\NuGet\NGravatar.Core.nuspec">
+    <None Include="..\..\..\NGravatar.Core\NuGet\NGravatar.Core.nuspec">
       <Link>NuGet\NGravatar.Core.nuspec</Link>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup />
 </Project>
