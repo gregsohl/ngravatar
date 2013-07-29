@@ -41,6 +41,7 @@
     <Folder Include="Properties\" />
     <Folder Include="Html\" />
     <Folder Include="Utils\" />
+    <Folder Include="NuGet\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\NGravatar\Properties\AssemblyInfo.cs">
@@ -65,6 +66,9 @@
   <ItemGroup>
     <None Include="..\..\..\NGravatar\ReadMe.txt">
       <Link>ReadMe.txt</Link>
+    </None>
+    <None Include="..\..\..\NGravatar\NuGet\NGravatar.nuspec">
+      <Link>NuGet\NGravatar.nuspec</Link>
     </None>
   </ItemGroup>
 </Project>

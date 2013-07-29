@@ -88,5 +88,11 @@
     <Folder Include="Abstractions\" />
     <Folder Include="Utils\" />
     <Folder Include="ProfileInformation\" />
+    <Folder Include="NuGet\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\NGravatar.Core\NuGet\NGravatar.Core.nuspec">
+      <Link>NuGet\NGravatar.Core.nuspec</Link>
+    </None>
   </ItemGroup>
 </Project>
