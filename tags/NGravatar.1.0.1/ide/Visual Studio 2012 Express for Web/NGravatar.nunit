@@ -1,0 +1,7 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Default" processModel="Default" domainUsage="Default" />
+  <Config name="Default" binpathtype="Auto" runtimeFramework="v0.0">
+    <assembly path="NGravatar.Tests\bin\NGravatar.Tests.dll" />
+    <assembly path="NGravatar.Core.Tests\bin\NGravatar.Core.Tests.dll" />
+  </Config>
+</NUnitProject>
