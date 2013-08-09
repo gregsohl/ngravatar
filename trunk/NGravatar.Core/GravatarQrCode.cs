@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+
+using NGravatar.Utils;
 
 namespace NGravatar {
 
@@ -6,6 +9,18 @@ namespace NGravatar {
     /// Client class for the Gravatar QR code API.
     /// </summary>
     public class GravatarQrCode {
+
+        internal HtmlBuilder HtmlBuilder {
+            get {
+                if (null == _HtmlBuilder) _HtmlBuilder = HtmlBuilder.DefaultInstance;
+                return _HtmlBuilder;
+            }
+            set {
+                if (null == value) throw new ArgumentNullException("HtmlBuilder");
+                _HtmlBuilder = value;
+            }
+        }
+        private HtmlBuilder _HtmlBuilder;
 
         /// <summary>
         /// Gets the URL that links to the Gravatar QR code of the specified <paramref name="emailAddress"/>.
@@ -20,7 +35,7 @@ namespace NGravatar {
         /// of the <see cref="Gravatar.DefaultInstance"/>.
         /// </param>
         /// <returns>The URL of the QR code for the specified <paramref name="emailAddress"/>.</returns>
-        public string GetUrl(string emailAddress, int? size, bool? useHttps = null) {
+        public string GetUrl(string emailAddress, int? size = null, bool? useHttps = null) {
             var g = Gravatar.DefaultInstance;
             var url = g.GetBaseUrl(useHttps) + "/" + g.GetHash(emailAddress) + ".qr";
 
@@ -31,6 +46,16 @@ namespace NGravatar {
                 : url;
         }
 
+        public string Render(string emailAddress, int? size = null, bool? useHttps = null, IDictionary<string, object> htmlAttributes = null) {
+            var g = Gravatar.DefaultInstance;
 
+            size = size ?? g.Size ?? g.RenderedSize;
+
+            return HtmlBuilder.RenderImageTag(
+                url: GetUrl(emailAddress, size, useHttps),
+                size: size,
+                htmlAttributes: htmlAttributes
+            );
+        }
     }
 }

@@ -85,6 +85,9 @@
     <Compile Include="..\..\..\NGravatar.Core\GravatarQrCode.cs">
       <Link>GravatarQrCode.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\NGravatar.Core\GravatarVCard.cs">
+      <Link>GravatarVCard.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
