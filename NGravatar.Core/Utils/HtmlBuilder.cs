@@ -37,7 +37,21 @@ namespace NGravatar.Utils {
         }
         private static HtmlBuilder _DefaultInstance;
 
-        public virtual string RenderImageTag(IDictionary<string, object> htmlAttributes) {
+        public virtual string RenderImageTag(string url = null, int? size = null, IDictionary<string, object> htmlAttributes = null) {
+
+            if (htmlAttributes == null) {
+                htmlAttributes = new Dictionary<string, object>();
+            }
+
+            if (url != null) {
+                htmlAttributes["src"] = url;
+            }
+
+            if (size != null) {
+                htmlAttributes["width"] = size;
+                htmlAttributes["height"] = size;
+            }
+
             return string.Format("<img {0} />", RenderAttributes(htmlAttributes));
         }
 

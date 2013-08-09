@@ -173,14 +173,11 @@ namespace NGravatar {
 
             size = size ?? Size ?? RenderedSize;
 
-            htmlAttributes = htmlAttributes == null
-                ? new Dictionary<string, object>()
-                : new Dictionary<string, object>(htmlAttributes);
-            htmlAttributes["src"] = GetUrl(emailAddress, size, rating, @default, forceDefault, useHttps);
-            htmlAttributes["width"] = size;
-            htmlAttributes["height"] = size;
-
-            return HtmlBuilder.RenderImageTag(htmlAttributes);
+            return HtmlBuilder.RenderImageTag(
+                url: GetUrl(emailAddress, size, rating, @default, forceDefault, useHttps),
+                size: size,
+                htmlAttributes: htmlAttributes
+            );
         }
     }
 }
