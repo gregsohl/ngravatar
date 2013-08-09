@@ -37,7 +37,7 @@ namespace NGravatar.Utils.Tests {
 
         [Test]
         public void RenderImageTag_EscapesAttributes() {
-            var actual = new HtmlBuilder().RenderImageTag(new Dictionary<string, object> {
+            var actual = new HtmlBuilder().RenderImageTag(htmlAttributes: new Dictionary<string, object> {
                 { "class", "ok" },
                 { "data-script", "\"><script type='text/javascript' src='badscript.js'></script><img \"" },
                 { "id", 53 }
