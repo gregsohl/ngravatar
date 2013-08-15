@@ -38,7 +38,7 @@ namespace NGravatar {
         }
         private HtmlBuilder _HtmlBuilder;
 
-        internal string GetBaseUrl(bool? useHttps) {
+        internal string GetBaseUrl(bool? useHttps = null) {
             useHttps = useHttps ?? UseHttps;
             return (useHttps.HasValue && useHttps.Value)
                 ? "https://secure.gravatar.com"
