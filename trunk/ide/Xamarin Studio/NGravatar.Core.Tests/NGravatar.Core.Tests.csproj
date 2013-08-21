@@ -93,6 +93,9 @@
     <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarQrCodeTests.cs">
       <Link>GravatarQrCodeTests.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\NGravatar.Core.Tests\GravatarVCardTests.cs">
+      <Link>GravatarVCardTests.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NGravatar.Core\NGravatar.Core.csproj">
