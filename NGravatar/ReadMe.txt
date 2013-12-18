@@ -47,6 +47,7 @@ Change Log
 **********
 -- 1.0.0
 -- 27 July 2013
+-- Ken Yourek
 -- Rewrote the code to be cleaner, easier to maintain, easier to
    extend, easier to understand, easier to test, etc. There are
    lots of breaking changes here. To avoid those changes, don't
