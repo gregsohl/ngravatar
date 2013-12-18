@@ -8,7 +8,7 @@ All projects (libraries, examples, and tests) in the NGravatar code repository a
 
 = Details =
 
-*Copyright (c) 2012 Ken Yourek*
+*Copyright (c) 2012-2013 Ken Yourek*
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
 of this software and associated documentation files (the "Software"), to deal 
