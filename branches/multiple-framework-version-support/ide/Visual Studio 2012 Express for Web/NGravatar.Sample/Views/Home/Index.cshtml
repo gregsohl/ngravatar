@@ -1,0 +1,198 @@
+﻿@using NGravatar.Html;
+
+<h2>How to use NGravatar</h2>
+
+<h4>Include the NGravatar.Html namespace.</h4>
+<p>
+    This namespace is required wherever you want to use the HtmlHelper or UrlHelper
+    extension methods provided by the NGravatar assembly. You can include it directly
+    in your views by adding an @("@using") directive at the top, like so:
+</p>
+<pre>
+@("@using NGravatar.Html;")
+</pre>
+<hr />
+
+<h4>Render Gravatar avatars in an img element.</h4>
+<p>
+    This is done by providing an email address and size to the Gravatar HtmlHelper
+    extension method.
+</p>
+<pre>
+@("@Html.Gravatar(\"ngravatar@kendoll.net\", 100)")
+</pre>
+@Html.Gravatar("ngravatar@kendoll.net", 100)
+
+<p>
+    Element attributes can also be added to the img tag by providing a
+    value for the htmlAttributes parameter.
+</p>
+<pre>
+@("@Html.Gravatar(\"ngravatar@kendoll.net\", 80, htmlAttributes: new { style = \"border:10px solid blue;\" })")
+</pre>
+@Html.Gravatar("ngravatar@kendoll.net", 80, htmlAttributes: new { style = "border:10px solid blue;" })
+<hr />
+
+<h4>Get an email address's Gravatar URL.</h4>
+<p>
+    If you want to create the img tag yourself (or any other tag that uses the Gravatar URL), 
+    you can get just the URL of a Gravatar avatar by using the Gravatar UrlHelper extension methods.
+</p>
+<pre>
+@("<a href=\"@Url.Gravatar(\"ngravatar@kendoll.net\", 200)\"><strong>Click</strong> for a Gravatar avatar.</a>")
+</pre>
+<a href="@Url.Gravatar("ngravatar@kendoll.net", 200)"><strong>Click</strong> for a Gravatar avatar.</a>
+<hr />
+
+<h4>Set the rating and default images of Gravatars.</h4>
+<p>
+    Gravatar lets you control the content of rendered Gravatar images by providing a rating that images
+    may not exceed. For example, if you provide a rating of PG, only images rated PG or G may be shown.
+    If no Gravatar exists for an email address, you can provide a default image that will be shown in
+    its place. All of this functionality is provided by NGravatar.
+</p>
+<pre>
+@("@Html.Gravatar(")
+    @("\"`not%an#email$address`\",")
+    @("100,")
+    @("NGravatar.GravatarRating.PG,")
+    @("\"http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100\"")
+@(")")
+</pre>
+@Html.Gravatar(
+    "`not%an#email$address`", 
+    100, 
+    NGravatar.GravatarRating.PG,    
+    "http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100"
+)
+
+<p>
+    The maximum Gravatar rating and default image can also be set site-wide by using the static
+    DefaultInstance property of the Gravatar type. Calls to extension methods that don't provide
+    rating or default-image information will fall back to using the property values of this instance.
+</p>
+<pre>
+@("@{")
+    @("NGravatar.Gravatar.DefaultInstance.Rating = NGravatar.GravatarRating.PG;")
+    @("NGravatar.Gravatar.DefaultInstance.Default = \"http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100\";")
+@("}")
+@("@Html.Gravatar(\"`not%an#email$address`\", 100);")
+</pre>
+@{ 
+    NGravatar.Gravatar.DefaultInstance.Rating = NGravatar.GravatarRating.PG; 
+    NGravatar.Gravatar.DefaultInstance.Default = "http://www.gravatar.com/avatar/9bbe9d2fdf7f923bc993a5895936350d.png&size=100";
+}
+@Html.Gravatar("`not%an#email$address`", 100);
+
+<p>
+    To remove site-wide settings, set the DefaultInstance properties to null.
+</p>
+<pre>
+@("@{")
+    @("NGravatar.Gravatar.DefaultInstance.Rating = null;")
+    @("NGravatar.Gravatar.DefaultInstance.Default = null;")
+@("}")
+</pre>
+@{ 
+    NGravatar.Gravatar.DefaultInstance.Rating = null; 
+    NGravatar.Gravatar.DefaultInstance.Default = null;
+}
+
+<p>
+    The Gravatar documentation <a href="https://en.gravatar.com/site/implement/images/">here</a> explains some additional
+    options for the default image. These strings can be passed in place of an image URL to get the effect described below.
+</p>
+<ul>
+    <li>404: do not load any image if none is associated with the email hash, instead return an HTTP 404 (File Not Found) response</li>
+    <li>mm: (mystery-man) a simple, cartoon-style silhouetted outline of a person (does not vary by email hash)</li>
+    <li>identicon: a geometric pattern based on an email hash</li>
+    <li>monsterid: a generated 'monster' with different colors, faces, etc</li>
+    <li>wavatar: generated faces with differing features and backgrounds</li>
+    <li>retro: awesome generated, 8-bit arcade-style pixelated faces</li>
+    <li>blank: a transparent PNG image (border added to HTML below for demonstration purposes)</li>
+</ul>
+<pre>
+@("@Html.Gravatar(\"na\", @default: \"404\") @Html.Gravatar(\"na\", @default: \"mm\") @Html.Gravatar(\"na\", @default: \"identicon\")")
+@("@Html.Gravatar(\"na\", @default: \"monsterid\") @Html.Gravatar(\"na\", @default: \"wavatar\") @Html.Gravatar(\"na\", @default: \"retro\")")
+@("@Html.Gravatar(\"na\", @default: \"blank\", htmlAttributes: new { style = \"border: 1px solid black\" })")
+</pre>
+@Html.Gravatar("na", @default: "404") @Html.Gravatar("na", @default: "mm") @Html.Gravatar("na", @default: "identicon")
+@Html.Gravatar("na", @default: "monsterid") @Html.Gravatar("na", @default: "wavatar") @Html.Gravatar("na", @default: "retro")
+@Html.Gravatar("na", @default: "blank", htmlAttributes: new { style = "border: 1px solid black" })
+
+<hr />
+
+<h4>Use HTTPS.</h4>
+<p>
+    You can use Gravatar's HTTPS URL by setting the useHttps flag to true. This is also a value that can be set
+    site-wide by using the UseHttps property of the Gravatar DefaultInstance. This is useful if your site requires
+    HTTPS: set it once and forget it.
+</p>
+<pre>
+@("@{ NGravatar.Gravatar.DefaultInstance.UseHttps = true; }")
+@("@Html.Gravatar(\"ngravatar@kendoll.net\");")
+@("<br />")
+@("@{ NGravatar.Gravatar.DefaultInstance.UseHttps = false; }")
+@("@Url.Gravatar(\"ngravatar@kendoll.net\", useHttps: true)")
+</pre>
+@{ NGravatar.Gravatar.DefaultInstance.UseHttps = true; }
+@Html.Gravatar("ngravatar@kendoll.net")
+<br />
+@{ NGravatar.Gravatar.DefaultInstance.UseHttps = false; }
+@Url.Gravatar("ngravatar@kendoll.net", useHttps: true)
+
+<hr />
+
+<h4>Get Gravatar profile information.</h4>
+<p>
+    NGravatar also includes methods to retrieve Gravatar profile information for an email address.
+    Profile information is passed via an XML or JSON API and parsed into POCO objects.
+</p>
+<pre>
+@("@{ var profile = new NGravatar.GravatarProfile().LoadInformation(\"ngravatar@kendoll.net\"); }")
+@("<ul>")
+    @("<li>Id: @profile.Id</li>")
+    @("<li>Hash: @profile.Hash</li>")
+    @("<li>Formatted Name: @profile.Name.Formatted</li>")
+    @("@foreach (var photo in profile.Photos) {")
+        @("<li>Photo: <img src=\"@photo.Value\" /></li>")
+    @("}")
+@("</ul>")
+</pre>
+@{ var profile = new NGravatar.GravatarProfile().LoadInformation("ngravatar@kendoll.net"); }
+<ul>
+    <li>Id: @profile.Id</li>
+    <li>Hash: @profile.Hash</li>
+    <li>Formatted Name: @profile.Name.Formatted</li>
+    @foreach (var photo in profile.Photos) {
+        <li>Photo: <img src="@photo.Value" /></li>
+    }
+</ul>
+
+<p>
+    Or, just provide a link to the profile.
+</p>
+<pre>
+@("@Html.GravatarProfileLink(\"ngravatar@kendoll.net\", \"My Gravatar profile!\")")
+</pre>
+@Html.GravatarProfileLink("ngravatar@kendoll.net", "My Gravatar profile!")
+
+<p>
+    Or, use a script to process the profile information. This is done by creating a
+    script tag and specifiying the callback function that processes the result from
+    the Gravatar API.
+</p>
+<pre>
+@("<script type=\"text/javascript\">")
+    @("function processGravatarProfile(response) {")
+        @("console.log(response);")
+    @("}")
+@("</script>")
+@("@Html.GravatarProfileScript(\"ngravatar@kendoll.net\", \"processGravatarProfile\")")
+</pre>
+<script type="text/javascript">
+    function processGravatarProfile(response) {
+        console.log(response);
+    }
+</script>
+@Html.GravatarProfileScript("ngravatar@kendoll.net", "processGravatarProfile")
